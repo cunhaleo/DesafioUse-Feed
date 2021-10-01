@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var viewController: UIViewController = SignInViewController()
             
             if Auth.auth().currentUser != nil {
-                viewController = HomeViewController()
+                viewController = HomeTabViewController()
             }
             
             let navBar = UINavigationController(rootViewController: viewController)
