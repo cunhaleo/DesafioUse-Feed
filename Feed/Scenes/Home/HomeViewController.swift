@@ -15,21 +15,23 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
-    @IBAction func buttonLogout(_ sender: Any) {
-        FirebaseAuthManager.logout()
+    // MARK: - Actions
+    @objc
+    private func handlerButtonLogout() {
+        UserSession.shared.logout()
         
-        navigationController?.pushViewController(SignInViewController(), animated: true)
+        let viewController = SignInViewController()
+        let navBar = UINavigationController(rootViewController: viewController)
+        UIApplication.shared.windows.first?.rootViewController = navBar
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Methods
+    private func setupUI() {
+        let buttonLogout = UIBarButtonItem(title: "logout", style: .plain, target: self, action: #selector(handlerButtonLogout))
+        
+        navigationItem.leftBarButtonItem = buttonLogout
+        
     }
-    */
 
 }
+    
