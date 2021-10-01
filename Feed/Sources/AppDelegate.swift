@@ -17,16 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        let rootViewController = UIViewController()
+        setupRootViewController()
         
-        rootViewController.view.backgroundColor = .blue
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
-        window?.makeKeyAndVisible()
         
         
                 return true
+    }
+    private func setupRootViewController(){
+        let viewController = SignInViewController()
+        UINavigationController(rootViewController: viewController)
+        
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+        
     }
 
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0FDFAD50A2382DB747352E75 /* Pods_Feed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEBD9D3E5B1AE95DB31D923 /* Pods_Feed.framework */; };
+		901BEF8127071EE300B822D3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF7F27071EE300B822D3 /* SignUpViewController.swift */; };
+		901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF8027071EE300B822D3 /* SignUpViewController.xib */; };
 		903BC9C32706891200A4DE91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 903BC9C22706891200A4DE91 /* GoogleService-Info.plist */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
 		F40044612706969400B910F2 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F400445F2706969400B910F2 /* SignInViewController.xib */; };
@@ -18,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		77E688960E2D2DDDEE72B15B /* Pods-Feed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.debug.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.debug.xcconfig"; sourceTree = "<group>"; };
+		901BEF7F27071EE300B822D3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		901BEF8027071EE300B822D3 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		903BC9C22706891200A4DE91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9CEBD9D3E5B1AE95DB31D923 /* Pods_Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE51D86919D49B308DA88BA7 /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +63,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		901BEF7E27071CEF00B822D3 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				901BEF7F27071EE300B822D3 /* SignUpViewController.swift */,
+				901BEF8027071EE300B822D3 /* SignUpViewController.xib */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		903BC9BF2706870E00A4DE91 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,8 +102,8 @@
 		F400445B2706964600B910F2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				901BEF7E27071CEF00B822D3 /* SignUp */,
 				F400445C2706964F00B910F2 /* SignIn */,
-				F400445D2706965800B910F2 /* SignUp */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -102,13 +115,6 @@
 				F400445F2706969400B910F2 /* SignInViewController.xib */,
 			);
 			path = SignIn;
-			sourceTree = "<group>";
-		};
-		F400445D2706965800B910F2 /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SignUp;
 			sourceTree = "<group>";
 		};
 		F45397EE270670F40088ACCD = {
@@ -198,6 +204,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */,
 				F40044612706969400B910F2 /* SignInViewController.xib in Resources */,
 				F4539807270670F80088ACCD /* LaunchScreen.storyboard in Resources */,
 				F4539804270670F80088ACCD /* Assets.xcassets in Resources */,
@@ -254,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				901BEF8127071EE300B822D3 /* SignUpViewController.swift in Sources */,
 				F40044602706969400B910F2 /* SignInViewController.swift in Sources */,
 				F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */,
 			);

@@ -8,11 +8,36 @@
 import UIKit
 
 class SignInViewController: UIViewController {
+    
+    // MARK: - Variables & Attributes
+    
+    
+    // MARK: - Outlets
 
+    @IBOutlet weak var textFieldEmail: UITextField!
+    
+    @IBOutlet weak var textFieldPassword: UITextField!
+    
+    // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+    }
+    // MARK: - Actions
+    
+    @IBAction func buttonCadastrar(_ sender: Any) {
+    }
+    
+    
+    @IBAction func buttonEntry(_ sender: Any) {
+    }
+    
+    // MARK: - Methods
+    private func setupUI () {
+        
+        
+        
     }
 
 }
