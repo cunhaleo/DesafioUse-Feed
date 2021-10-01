@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return true
     }
     private func setupRootViewController(){
-        let viewController = SignInViewController()
+        let viewController = SignUpViewController()
         UINavigationController(rootViewController: viewController)
         
         
