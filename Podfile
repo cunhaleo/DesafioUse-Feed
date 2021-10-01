@@ -8,5 +8,6 @@ target 'Feed' do
   # Pods for Feed
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'FirebaseFirestoreSwift'
   
 end

@@ -7,11 +7,12 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class SignUpViewController: UIViewController {
     
     // MARK: - Variables & Attributes
-    
+    let db = Firestore.firestore()
     
     
     // MARK: - Outlets
