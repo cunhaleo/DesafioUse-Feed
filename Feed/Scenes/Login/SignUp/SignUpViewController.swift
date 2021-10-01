@@ -25,7 +25,7 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
     }
 
 
@@ -79,6 +79,9 @@ class SignUpViewController: UIViewController {
         let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(buttonOk)
         present(alert, animated: true, completion: nil)
+    }
+    func setupUI(){
+        title = "Registrar-se"
     }
     
 }

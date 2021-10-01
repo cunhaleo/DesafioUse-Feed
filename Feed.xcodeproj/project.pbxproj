@@ -12,6 +12,8 @@
 		901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF8027071EE300B822D3 /* SignUpViewController.xib */; };
 		901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF832707442800B822D3 /* FirebaseAuthManager.swift */; };
 		901BEF862707446400B822D3 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF852707446400B822D3 /* UserSession.swift */; };
+		901BEF8E270751DF00B822D3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF8C270751DF00B822D3 /* HomeViewController.swift */; };
+		901BEF8F270751DF00B822D3 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF8D270751DF00B822D3 /* HomeViewController.xib */; };
 		903BC9C32706891200A4DE91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 903BC9C22706891200A4DE91 /* GoogleService-Info.plist */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
 		F40044612706969400B910F2 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F400445F2706969400B910F2 /* SignInViewController.xib */; };
@@ -26,6 +28,8 @@
 		901BEF8027071EE300B822D3 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		901BEF832707442800B822D3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		901BEF852707446400B822D3 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		901BEF8C270751DF00B822D3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		901BEF8D270751DF00B822D3 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		903BC9C22706891200A4DE91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9CEBD9D3E5B1AE95DB31D923 /* Pods_Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE51D86919D49B308DA88BA7 /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +80,15 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		901BEF8727074F0100B822D3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				901BEF8C270751DF00B822D3 /* HomeViewController.swift */,
+				901BEF8D270751DF00B822D3 /* HomeViewController.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		903BC9BF2706870E00A4DE91 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +113,7 @@
 		903BC9C12706875100A4DE91 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				901BEF8727074F0100B822D3 /* Home */,
 				F400445B2706964600B910F2 /* Login */,
 			);
 			path = Scenes;
@@ -215,6 +229,7 @@
 				F4539807270670F80088ACCD /* LaunchScreen.storyboard in Resources */,
 				F4539804270670F80088ACCD /* Assets.xcassets in Resources */,
 				903BC9C32706891200A4DE91 /* GoogleService-Info.plist in Resources */,
+				901BEF8F270751DF00B822D3 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +287,7 @@
 				F40044602706969400B910F2 /* SignInViewController.swift in Sources */,
 				901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */,
 				F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */,
+				901BEF8E270751DF00B822D3 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

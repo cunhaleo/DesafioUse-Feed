@@ -42,7 +42,9 @@ class SignInViewController: UIViewController {
                 print("==> Error: \(error?.localizedDescription)")
             }
             else {
-                print("Usuario cadastrado")
+                let viewController = HomeViewController()
+                self.navigationController?.pushViewController(viewController, animated: true)
+                print("Usuario logado")
             }
         }
     }

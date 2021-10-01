@@ -20,21 +20,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupRootViewController()
         
-        
-        
-        
-                return true
+        return true
     }
-    private func setupRootViewController(){
-        let viewController = SignInViewController()
-        
-        
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: viewController)
-        window?.makeKeyAndVisible()
-        
-    }
-
+        private func setupRootViewController() {
+            var viewController: UIViewController = SignInViewController()
+            
+            if Auth.auth().currentUser != nil {
+                viewController = HomeViewController()
+            }
+            
+            let navBar = UINavigationController(rootViewController: viewController)
+            
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = navBar
+            window?.makeKeyAndVisible()
+        }
 }
+
+
 
