@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import FirebaseFirestore
 
 class SignUpViewController: UIViewController {
@@ -43,15 +42,14 @@ class SignUpViewController: UIViewController {
         
         if validateFields(name: name, email: email, password: password, confirmPassword: confirmPassword) {
             
-            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            FirebaseAuthManager.createAccount(name: name, email: email, password: password) { error in
                 if error != nil {
-                    print(error?.localizedDescription)
+                    print("==> Error: \(error?.localizedDescription)")
                 }
                 else {
-                    print("Usuario cadastrado!")
+                    print("Usuario Cadastrado")
                 }
             }
-        
         }
     }
     //MARK: - Methods

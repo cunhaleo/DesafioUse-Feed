@@ -35,12 +35,14 @@ class SignInViewController: UIViewController {
     @IBAction func buttonEntry(_ sender: Any) {
         guard let email = textFieldEmail.text, let password = textFieldPassword.text else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+        guard let email = textFieldEmail.text, let password = textFieldPassword.text else { return }
+        
+        FirebaseAuthManager.signIn(email: email, password: password) { error in
             if error != nil {
                 print("==> Error: \(error?.localizedDescription)")
             }
             else {
-                print("Usuario Logado")
+                print("Usuario cadastrado")
             }
         }
     }
