@@ -48,6 +48,7 @@ class SignUpViewController: UIViewController {
                 }
                 else {
                     print("Usuario Cadastrado")
+                    self.showAlert(title: "Sucesso", message: "Cadastro realizado.")
                 }
             }
         }

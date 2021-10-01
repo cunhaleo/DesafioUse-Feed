@@ -39,6 +39,7 @@ class SignInViewController: UIViewController {
         FirebaseAuthManager.signIn(email: email, password: password) { error in
             if error != nil {
                 print("==> Error: \(error?.localizedDescription)")
+                self.showAlert(title: "Erro", message: "Login inválido!")
             }
             else {
                 let viewController = HomeViewController()
@@ -59,5 +60,12 @@ class SignInViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .yellow
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
     }
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(buttonOk)
+        present(alert, animated: true, completion: nil)
+        }
+        
 
 }
