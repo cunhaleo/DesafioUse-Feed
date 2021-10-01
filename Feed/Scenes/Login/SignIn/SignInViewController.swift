@@ -22,8 +22,8 @@ class SignInViewController: UIViewController {
     // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        setupUI()
+        setupNavigation()
     }
     // MARK: - Actions
     
@@ -53,6 +53,11 @@ class SignInViewController: UIViewController {
     private func setupUI () {
         title = "Fazer login"
         
+    }
+    
+    func setupNavigation() {
+        navigationController?.navigationBar.barTintColor = .yellow
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
     }
 
 }
