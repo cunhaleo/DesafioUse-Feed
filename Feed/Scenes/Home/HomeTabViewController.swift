@@ -13,13 +13,18 @@ class HomeTabViewController: UITabBarController {
         super.viewDidLoad()
 
         viewControllers = [
-        ProfileViewController()
-        
-        
+            createNewPost(),
+            ProfileViewController()
         ]
         selectedIndex = 0
     }
 
+    func createNewPost() -> UIViewController{
+        let viewController = NewPostViewController()
+        viewController.tabBarItem.title = "Postar"
+        
+        return viewController
+    }
 
 
 

@@ -20,6 +20,8 @@
 		903BC9C32706891200A4DE91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 903BC9C22706891200A4DE91 /* GoogleService-Info.plist */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
 		F40044612706969400B910F2 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F400445F2706969400B910F2 /* SignInViewController.xib */; };
+		F43D03732707C6A9005A536B /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D03712707C6A9005A536B /* NewPostViewController.swift */; };
+		F43D03742707C6A9005A536B /* NewPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43D03722707C6A9005A536B /* NewPostViewController.xib */; };
 		F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45397FA270670F40088ACCD /* AppDelegate.swift */; };
 		F4539804270670F80088ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4539803270670F80088ACCD /* Assets.xcassets */; };
 		F4539807270670F80088ACCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4539805270670F80088ACCD /* LaunchScreen.storyboard */; };
@@ -41,6 +43,8 @@
 		CE51D86919D49B308DA88BA7 /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
 		F400445E2706969400B910F2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		F400445F2706969400B910F2 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		F43D03712707C6A9005A536B /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		F43D03722707C6A9005A536B /* NewPostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPostViewController.xib; sourceTree = "<group>"; };
 		F45397F7270670F40088ACCD /* Feed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45397FA270670F40088ACCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4539803270670F80088ACCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 		901BEF8727074F0100B822D3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F43D03702707C677005A536B /* NewPost */,
 				901BEF922707B31A00B822D3 /* HomeTabViewController.swift */,
 				901BEF932707B31A00B822D3 /* HomeTabViewController.xib */,
 				901BEF962707B33C00B822D3 /* Perfil */,
@@ -152,6 +157,15 @@
 				F400445F2706969400B910F2 /* SignInViewController.xib */,
 			);
 			path = SignIn;
+			sourceTree = "<group>";
+		};
+		F43D03702707C677005A536B /* NewPost */ = {
+			isa = PBXGroup;
+			children = (
+				F43D03712707C6A9005A536B /* NewPostViewController.swift */,
+				F43D03722707C6A9005A536B /* NewPostViewController.xib */,
+			);
+			path = NewPost;
 			sourceTree = "<group>";
 		};
 		F45397EE270670F40088ACCD = {
@@ -242,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */,
+				F43D03742707C6A9005A536B /* NewPostViewController.xib in Resources */,
 				F40044612706969400B910F2 /* SignInViewController.xib in Resources */,
 				901BEF952707B31A00B822D3 /* HomeTabViewController.xib in Resources */,
 				F4539807270670F80088ACCD /* LaunchScreen.storyboard in Resources */,
@@ -305,6 +320,7 @@
 				F40044602706969400B910F2 /* SignInViewController.swift in Sources */,
 				901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */,
 				F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */,
+				F43D03732707C6A9005A536B /* NewPostViewController.swift in Sources */,
 				901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */,
 				901BEF8E270751DF00B822D3 /* ProfileViewController.swift in Sources */,
 				901BEF912707A45000B822D3 /* LoginViewModel.swift in Sources */,
