@@ -49,6 +49,9 @@ class SignUpViewController: UIViewController {
                 else {
                     print("Usuario Cadastrado")
                     self.showAlert(title: "Sucesso", message: "Cadastro realizado.")
+                    
+                    self.openHome()
+                    
                 }
             }
         }
@@ -85,5 +88,12 @@ class SignUpViewController: UIViewController {
         title = "Registrar-se"
     }
     
+    private func openHome() {
+        let viewController = HomeTabViewController()
+        let navBar = UINavigationController(rootViewController: viewController)
+        UIApplication.shared.windows.first?.rootViewController = navBar
+        print("Usuario logado")
+        
+    }
 }
     

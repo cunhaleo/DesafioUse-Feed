@@ -42,10 +42,7 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
                 self.showAlert(title: "Erro", message: "Login inválido!")
             }
             else {
-                let viewController = HomeTabViewController()
-                let navBar = UINavigationController(rootViewController: viewController)
-                UIApplication.shared.windows.first?.rootViewController = navBar
-                print("Usuario logado")
+                self.openHome()
             }
         }
     }
@@ -53,6 +50,14 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - Methods
     private func setupUI () {
         title = "Fazer login"
+        
+    }
+    
+    private func openHome() {
+        let viewController = HomeTabViewController()
+        let navBar = UINavigationController(rootViewController: viewController)
+        UIApplication.shared.windows.first?.rootViewController = navBar
+        print("Usuario logado")
         
     }
     
