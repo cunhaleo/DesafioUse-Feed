@@ -43,9 +43,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouC-Pc-WTa">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouC-Pc-WTa">
                     <rect key="frame" x="20" y="492" width="374" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.24286996869999999" green="0.68146344800000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Cadastrar">
@@ -66,8 +65,11 @@
                 <constraint firstItem="Fwr-fV-Oag" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="200" id="dxU-sP-Sic"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ENJ-bm-tC4" secondAttribute="trailing" constant="20" id="e06-2H-3Ny"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fwr-fV-Oag" secondAttribute="trailing" constant="20" id="fuQ-NZ-9vJ"/>
+                <constraint firstItem="ouC-Pc-WTa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jOB-uk-Jxj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iIk-Gd-EdR" secondAttribute="trailing" constant="20" id="jhK-We-43A"/>
+                <constraint firstItem="ouC-Pc-WTa" firstAttribute="top" secondItem="iIk-Gd-EdR" secondAttribute="bottom" constant="52" id="nX3-JO-xBw"/>
                 <constraint firstItem="ENJ-bm-tC4" firstAttribute="top" secondItem="Fwr-fV-Oag" secondAttribute="bottom" constant="20" id="pAn-Js-OZY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ouC-Pc-WTa" secondAttribute="trailing" constant="20" id="pPU-yi-6c6"/>
                 <constraint firstItem="ENJ-bm-tC4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="qii-I1-KND"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0my-Fv-TaZ" secondAttribute="trailing" constant="20" id="qnc-OX-mzJ"/>
                 <constraint firstItem="iIk-Gd-EdR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="xDD-rE-Df3"/>
