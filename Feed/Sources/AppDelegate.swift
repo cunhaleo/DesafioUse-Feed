@@ -25,12 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return true
     }
     private func setupRootViewController(){
-        let viewController = SignUpViewController()
-        UINavigationController(rootViewController: viewController)
+        let viewController = SignInViewController()
+        
         
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = viewController
+        window?.rootViewController = UINavigationController(rootViewController: viewController)
         window?.makeKeyAndVisible()
         
     }

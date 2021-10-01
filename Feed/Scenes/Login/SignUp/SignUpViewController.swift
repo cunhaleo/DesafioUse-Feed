@@ -76,7 +76,7 @@ class SignUpViewController: UIViewController {
         return isValid
     }
     private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(buttonOk)
         present(alert, animated: true, completion: nil)
