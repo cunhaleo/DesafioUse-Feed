@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         setupRootViewController()
-        
+      
         return true
     }
         private func setupRootViewController() {
@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = navBar
             window?.makeKeyAndVisible()
         }
+
 }
 
 

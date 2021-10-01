@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - Variables & Attributes
     
@@ -57,8 +57,12 @@ class SignInViewController: UIViewController {
     }
     
     func setupNavigation() {
-        navigationController?.navigationBar.barTintColor = .yellow
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        navigationController?.delegate = self
+        self.navigationController?.navigationBar.barTintColor = .systemYellow
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        self.navigationController?.navigationBar.tintColor = .black
+    
+  
     }
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
