@@ -66,9 +66,8 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
         self.navigationController?.navigationBar.barTintColor = .systemYellow
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         self.navigationController?.navigationBar.tintColor = .black
-    
-  
     }
+    
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
