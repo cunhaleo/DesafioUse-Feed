@@ -9,6 +9,8 @@ import UIKit
 
 class FeedTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var labelPost: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
