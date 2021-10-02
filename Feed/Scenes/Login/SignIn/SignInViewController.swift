@@ -62,10 +62,10 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func setupNavigation() {
-        navigationController?.delegate = self
-        self.navigationController?.navigationBar.barTintColor = .systemYellow
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        self.navigationController?.navigationBar.tintColor = .black
+        
+        navigationController?.navigationBar.barTintColor = .systemYellow
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.tintColor = .black
     }
     
     private func showAlert(title: String, message: String) {
