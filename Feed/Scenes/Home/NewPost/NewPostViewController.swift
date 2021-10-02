@@ -21,6 +21,7 @@ class NewPostViewController: UIViewController {
     // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     // MARK: - Actions
     
@@ -46,4 +47,5 @@ class NewPostViewController: UIViewController {
     
     // MARK: - Methods
 
+    
 }
