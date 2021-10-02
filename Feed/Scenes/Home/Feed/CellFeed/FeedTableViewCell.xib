@@ -110,7 +110,12 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="labelComments" destination="yhQ-Ga-XK6" id="kTg-3m-Ama"/>
+                <outlet property="labelData" destination="j24-it-4IQ" id="nta-kX-CVc"/>
+                <outlet property="labelIniciais" destination="juV-Bx-jiE" id="Ygf-5s-KEN"/>
+                <outlet property="labelLikes" destination="Cld-v8-nf8" id="bBg-D5-Pfb"/>
                 <outlet property="labelPost" destination="HlU-bX-aSI" id="uJZ-3w-NaK"/>
+                <outlet property="labelUser" destination="kVt-lZ-zzp" id="Oyx-OV-fpo"/>
             </connections>
             <point key="canvasLocation" x="155.79710144927537" y="150.66964285714286"/>
         </tableViewCell>

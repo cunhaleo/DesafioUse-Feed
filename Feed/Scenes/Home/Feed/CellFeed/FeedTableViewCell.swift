@@ -10,16 +10,39 @@ import UIKit
 class FeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelPost: UILabel!
+    @IBOutlet weak var labelIniciais: UILabel!
+    @IBOutlet weak var labelData: UILabel!
+    @IBOutlet weak var labelUser: UILabel!
+    @IBOutlet weak var labelLikes: UILabel!
+    @IBOutlet weak var labelComments: UILabel!
+
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func setup(name: String, date: String, post: String) {
+        labelUser.text = name
+        labelData.text = date
+        labelPost.text = post
+        labelIniciais.text = getLettersInitiais(name: name)
     }
     
+    func getLettersInitiais(name: String) -> String {
+
+        let unitaryNames = name.split(separator: " ")
+
+        if let firstName = unitaryNames.first?.description,
+           let lastName = unitaryNames.last?.description {
+
+            let char1 = firstName.first?.description ?? ""
+            let char2 = lastName.first?.description ?? ""
+            return char1 + char2
+        }
+        return "?"
+    }
 }

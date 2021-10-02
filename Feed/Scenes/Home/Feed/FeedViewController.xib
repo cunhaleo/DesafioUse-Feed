@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedViewController" customModule="Feed" customModuleProvider="target">
             <connections>
+                <outlet property="refreshing" destination="Pfd-Mb-Nc0" id="cU2-Dl-lW7"/>
                 <outlet property="tableView" destination="qAL-Jd-rqD" id="gKv-bQ-shO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -29,14 +30,19 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qAL-Jd-rqD" secondAttribute="trailing" id="CuI-R4-YlA"/>
                 <constraint firstItem="qAL-Jd-rqD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Htq-PB-NW7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qAL-Jd-rqD" secondAttribute="bottom" id="wBX-bC-KLN"/>
                 <constraint firstItem="qAL-Jd-rqD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="yUI-OF-cDw"/>
             </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="Pfd-Mb-Nc0" appends="YES" id="HcG-RK-vN9"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="91.741071428571431"/>
         </view>
+        <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="Pfd-Mb-Nc0"/>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">

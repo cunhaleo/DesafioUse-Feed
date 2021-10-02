@@ -21,6 +21,7 @@
 		901BEF9B2707C68200B822D3 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF992707C68200B822D3 /* FeedViewController.xib */; };
 		901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */; };
 		901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */; };
+		901BEFA32707E04800B822D3 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEFA22707E04800B822D3 /* PostModel.swift */; };
 		903BC9C32706891200A4DE91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 903BC9C22706891200A4DE91 /* GoogleService-Info.plist */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
 		F40044612706969400B910F2 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F400445F2706969400B910F2 /* SignInViewController.xib */; };
@@ -44,6 +45,7 @@
 		901BEF992707C68200B822D3 /* FeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
 		901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
+		901BEFA22707E04800B822D3 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		903BC9C22706891200A4DE91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9CEBD9D3E5B1AE95DB31D923 /* Pods_Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE51D86919D49B308DA88BA7 /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		901BEF972707C65900B822D3 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				901BEFA12707E02A00B822D3 /* Model */,
 				901BEF982707C68200B822D3 /* FeedViewController.swift */,
 				901BEF992707C68200B822D3 /* FeedViewController.xib */,
 				901BEF9C2707C79400B822D3 /* CellFeed */,
@@ -131,6 +134,14 @@
 				901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */,
 			);
 			path = CellFeed;
+			sourceTree = "<group>";
+		};
+		901BEFA12707E02A00B822D3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				901BEFA22707E04800B822D3 /* PostModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		903BC9BF2706870E00A4DE91 /* Resources */ = {
@@ -340,6 +351,7 @@
 				901BEF8E270751DF00B822D3 /* ProfileViewController.swift in Sources */,
 				901BEF912707A45000B822D3 /* LoginViewModel.swift in Sources */,
 				901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */,
+				901BEFA32707E04800B822D3 /* PostModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
