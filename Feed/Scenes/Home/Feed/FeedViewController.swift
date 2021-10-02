@@ -12,7 +12,6 @@ class FeedViewController: UIViewController {
     
     private let db = Firestore.firestore()
     private var posts: [PostModel] = []
-    // var activityIndicator:UIActivityIndicatorView? = nil
     let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
@@ -56,7 +55,6 @@ class FeedViewController: UIViewController {
                     self.posts.append(model)
                     
                 }
-                
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
                 
