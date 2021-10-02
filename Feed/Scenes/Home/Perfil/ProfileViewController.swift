@@ -11,6 +11,7 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
 
         // Do any additional setup after loading the view.
     }
@@ -27,6 +28,11 @@ class ProfileViewController: UIViewController {
         UIApplication.shared.windows.first?.rootViewController = navBar
         
     }
+    //MARK: - Methods
     
+    func setupUI() {
+        title = "Perfil"
+
+    }
 }
     

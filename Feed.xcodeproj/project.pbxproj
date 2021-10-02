@@ -103,9 +103,9 @@
 		901BEF8727074F0100B822D3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F43D03702707C677005A536B /* NewPost */,
 				901BEF922707B31A00B822D3 /* HomeTabViewController.swift */,
 				901BEF932707B31A00B822D3 /* HomeTabViewController.xib */,
+				F43D03702707C677005A536B /* NewPost */,
 				901BEF972707C65900B822D3 /* Feed */,
 				901BEF962707B33C00B822D3 /* Perfil */,
 			);

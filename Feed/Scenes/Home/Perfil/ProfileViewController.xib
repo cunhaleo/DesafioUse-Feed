@@ -19,12 +19,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-ST-N22">
-                    <rect key="frame" x="135" y="209" width="145" height="46"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-ST-N22">
+                    <rect key="frame" x="172.5" y="432.5" width="69.5" height="31"/>
+                    <color key="backgroundColor" systemColor="systemYellowColor"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="logout">
-                        <color key="baseForegroundColor" red="0.9746704517" green="0.93084899409999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Logout">
+                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </buttonConfiguration>
                     <connections>
                         <action selector="buttonLogout:" destination="-1" eventType="touchUpInside" id="mp8-Yd-Whl"/>
@@ -32,13 +32,17 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBrownColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="QAT-ST-N22" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ggK-XY-CyD"/>
+                <constraint firstItem="QAT-ST-N22" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="utF-w6-FGi"/>
+            </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="91.741071428571431"/>
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
