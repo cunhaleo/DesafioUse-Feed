@@ -13,11 +13,12 @@ class HomeTabViewController: UITabBarController {
         super.viewDidLoad()
 
         viewControllers = [
-        ProfileViewController()
+        ProfileViewController(),
+        FeedViewController()
         
         
         ]
-        selectedIndex = 0
+        selectedIndex = 1
     }
 
 
