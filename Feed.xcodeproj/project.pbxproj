@@ -17,6 +17,11 @@
 		901BEF912707A45000B822D3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF902707A45000B822D3 /* LoginViewModel.swift */; };
 		901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF922707B31A00B822D3 /* HomeTabViewController.swift */; };
 		901BEF952707B31A00B822D3 /* HomeTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF932707B31A00B822D3 /* HomeTabViewController.xib */; };
+		901BEF9A2707C68200B822D3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF982707C68200B822D3 /* FeedViewController.swift */; };
+		901BEF9B2707C68200B822D3 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF992707C68200B822D3 /* FeedViewController.xib */; };
+		901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */; };
+		901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */; };
+		901BEFA32707E04800B822D3 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEFA22707E04800B822D3 /* PostModel.swift */; };
 		903BC9C32706891200A4DE91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 903BC9C22706891200A4DE91 /* GoogleService-Info.plist */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
 		F40044612706969400B910F2 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F400445F2706969400B910F2 /* SignInViewController.xib */; };
@@ -38,6 +43,11 @@
 		901BEF902707A45000B822D3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		901BEF922707B31A00B822D3 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		901BEF932707B31A00B822D3 /* HomeTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTabViewController.xib; sourceTree = "<group>"; };
+		901BEF982707C68200B822D3 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		901BEF992707C68200B822D3 /* FeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
+		901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
+		901BEFA22707E04800B822D3 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		903BC9C22706891200A4DE91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9CEBD9D3E5B1AE95DB31D923 /* Pods_Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE51D86919D49B308DA88BA7 /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +106,7 @@
 				F43D03702707C677005A536B /* NewPost */,
 				901BEF922707B31A00B822D3 /* HomeTabViewController.swift */,
 				901BEF932707B31A00B822D3 /* HomeTabViewController.xib */,
+				901BEF972707C65900B822D3 /* Feed */,
 				901BEF962707B33C00B822D3 /* Perfil */,
 			);
 			path = Home;
@@ -108,6 +119,34 @@
 				901BEF8D270751DF00B822D3 /* ProfileViewController.xib */,
 			);
 			path = Perfil;
+			sourceTree = "<group>";
+		};
+		901BEF972707C65900B822D3 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				901BEFA12707E02A00B822D3 /* Model */,
+				901BEF982707C68200B822D3 /* FeedViewController.swift */,
+				901BEF992707C68200B822D3 /* FeedViewController.xib */,
+				901BEF9C2707C79400B822D3 /* CellFeed */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		901BEF9C2707C79400B822D3 /* CellFeed */ = {
+			isa = PBXGroup;
+			children = (
+				901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */,
+				901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */,
+			);
+			path = CellFeed;
+			sourceTree = "<group>";
+		};
+		901BEFA12707E02A00B822D3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				901BEFA22707E04800B822D3 /* PostModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		903BC9BF2706870E00A4DE91 /* Resources */ = {
@@ -255,9 +294,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */,
 				901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */,
 				F43D03742707C6A9005A536B /* NewPostViewController.xib in Resources */,
 				F40044612706969400B910F2 /* SignInViewController.xib in Resources */,
+				901BEF9B2707C68200B822D3 /* FeedViewController.xib in Resources */,
 				901BEF952707B31A00B822D3 /* HomeTabViewController.xib in Resources */,
 				F4539807270670F80088ACCD /* LaunchScreen.storyboard in Resources */,
 				F4539804270670F80088ACCD /* Assets.xcassets in Resources */,
@@ -316,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				901BEF8127071EE300B822D3 /* SignUpViewController.swift in Sources */,
+				901BEF9A2707C68200B822D3 /* FeedViewController.swift in Sources */,
 				901BEF862707446400B822D3 /* UserSession.swift in Sources */,
 				F40044602706969400B910F2 /* SignInViewController.swift in Sources */,
 				901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */,
@@ -324,6 +366,8 @@
 				901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */,
 				901BEF8E270751DF00B822D3 /* ProfileViewController.swift in Sources */,
 				901BEF912707A45000B822D3 /* LoginViewModel.swift in Sources */,
+				901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */,
+				901BEFA32707E04800B822D3 /* PostModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,6 @@ class HomeTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         viewControllers = [
             createNewPost(),
             ProfileViewController()
@@ -22,10 +21,6 @@ class HomeTabViewController: UITabBarController {
     func createNewPost() -> UIViewController{
         let viewController = NewPostViewController()
         viewController.tabBarItem.title = "Postar"
-        
         return viewController
     }
-
-
-
 }
