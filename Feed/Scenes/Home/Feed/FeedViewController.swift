@@ -38,7 +38,7 @@ class FeedViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
-        //tableView.reloadData()
+        tableView.reloadData()
     }
     
     private func stractPosts() {
@@ -75,14 +75,13 @@ class FeedViewController: UIViewController {
                 print(self.users)
                 
             }
-            if self.posts.count == self.users.count{
-                self.tableView.reloadData()
-            }
+            
+        self.tableView.reloadData()
         self.refreshControl.endRefreshing()
         }
+    }
 }
 
-}
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
 
@@ -93,20 +92,16 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
-            let post = posts[indexPath.row]
-            let username = users[indexPath.row]
-            cell.setup(name: username, date: "Sexta Feira", post: post.message)
+            if self.posts.count == self.users.count{
+                let post = posts[indexPath.row]
+                let username = users[indexPath.row]
+                cell.setup(name: username, date: "Sexta Feira", post: post.message)
 
             return cell
-          
+            }
+            return UITableViewCell()
         }else{
             return UITableViewCell()
         }
     }
-    
-    
-    
-    
-    
-    
 }
