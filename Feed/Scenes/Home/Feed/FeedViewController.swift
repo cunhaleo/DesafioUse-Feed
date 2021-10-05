@@ -12,6 +12,7 @@ class FeedViewController: UIViewController {
     
     private let db = Firestore.firestore()
     private var posts: [PostModel] = []
+    private var users: [UserModel] = []
     let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
@@ -47,13 +48,14 @@ class FeedViewController: UIViewController {
                 print(error?.localizedDescription)
             }else{
                 self.posts.removeAll()
+                //self.users.removeAll()
                 for document in query?.documents ?? []{
                     let dict = document.data()
                     let message = dict["message"] as? String ?? ""
                     let userId = dict["userId"] as? String ?? ""
                     let model = PostModel(message: message, userId: userId)
                     self.posts.append(model)
-                    
+                    self.stractUsernames(userId)
                 }
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
@@ -62,8 +64,24 @@ class FeedViewController: UIViewController {
         }
         
     }
-
+    private func stractUsernames(_ userId: String) {
+            
+            db.collection("users").document(userId).getDocument() { (document, err) in //Pegando name com ID do usuario
+            if let err = err {
+                print(err.localizedDescription)
+            } else {
+                let dict = document?.data() ?? [:]
+                let email = dict["email"] as? String ?? ""
+                let name = dict["name"] as? String ?? ""
+                let usermodel = UserModel(email: email, name: name)
+                
+                self.users.append(usermodel)
+                
+                }
+            }
+        }
 }
+
 
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -76,7 +94,8 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
             let post = posts[indexPath.row]
-            cell.setup(name: "Leo Cardoso", date: "Sexta Feira", post: post.message)
+          //  let username = users[indexPath.row]
+            cell.setup(name: "Leonardo", date: "Sexta Feira", post: post.message)
           return cell
         }else{
             return UITableViewCell()
