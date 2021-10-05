@@ -41,7 +41,7 @@ class FeedTableViewCell: UITableViewCell {
 
             let char1 = firstName.first?.description ?? ""
             let char2 = lastName.first?.description ?? ""
-            return char1 + char2
+            return char1.uppercased() + char2.uppercased()
         }
         return "?"
     }

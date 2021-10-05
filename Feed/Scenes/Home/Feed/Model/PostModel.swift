@@ -11,5 +11,11 @@ struct PostModel: Decodable {
     
     let message: String
     let userId: String
- 
+    
+}
+
+struct UserModel: Decodable {
+    
+    let name: String
+    
 }
