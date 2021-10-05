@@ -12,7 +12,7 @@ class FeedViewController: UIViewController {
     
     private let db = Firestore.firestore()
     private var posts: [PostModel] = []
-    private var users: [UserModel] = []
+    private var users: [String] = []
     let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
@@ -33,13 +33,12 @@ class FeedViewController: UIViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         stractPosts()
-        tableView.reloadData()
     }
     func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
-        tableView.reloadData()
+        //tableView.reloadData()
     }
     
     private func stractPosts() {
@@ -48,17 +47,17 @@ class FeedViewController: UIViewController {
                 print(error?.localizedDescription)
             }else{
                 self.posts.removeAll()
-                //self.users.removeAll()
+                self.users.removeAll()
                 for document in query?.documents ?? []{
                     let dict = document.data()
                     let message = dict["message"] as? String ?? ""
                     let userId = dict["userId"] as? String ?? ""
+                    self.stractUsernames(userId)
                     let model = PostModel(message: message, userId: userId)
                     self.posts.append(model)
-                    self.stractUsernames(userId)
+                    
                 }
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
+                
                 
             }
         }
@@ -66,23 +65,24 @@ class FeedViewController: UIViewController {
     }
     private func stractUsernames(_ userId: String) {
             
-            db.collection("users").document(userId).getDocument() { (document, err) in //Pegando name com ID do usuario
-            if let err = err {
-                print(err.localizedDescription)
-            } else {
+        db.collection("users").document(userId).getDocument() { (document, err) in //Pegando name com ID do usuario
+        if let err = err {
+            print(err.localizedDescription)
+            }else {
                 let dict = document?.data() ?? [:]
-                let email = dict["email"] as? String ?? ""
                 let name = dict["name"] as? String ?? ""
-                let usermodel = UserModel(email: email, name: name)
+                self.users.append(name)
+                print(self.users)
                 
-                self.users.append(usermodel)
-                
-                }
             }
+            if self.posts.count == self.users.count{
+                self.tableView.reloadData()
+            }
+        self.refreshControl.endRefreshing()
         }
 }
 
-
+}
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
 
@@ -94,9 +94,11 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
             let post = posts[indexPath.row]
-          //  let username = users[indexPath.row]
-            cell.setup(name: "Leonardo", date: "Sexta Feira", post: post.message)
-          return cell
+            let username = users[indexPath.row]
+            cell.setup(name: username, date: "Sexta Feira", post: post.message)
+
+            return cell
+          
         }else{
             return UITableViewCell()
         }
