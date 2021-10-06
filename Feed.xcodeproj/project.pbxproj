@@ -23,6 +23,8 @@
 		901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */; };
 		901BEFA32707E04800B822D3 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEFA22707E04800B822D3 /* PostModel.swift */; };
 		903BC9C32706891200A4DE91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 903BC9C22706891200A4DE91 /* GoogleService-Info.plist */; };
+		90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D97999270D10D0008CEB0C /* Extension+Date.swift */; };
+		90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D9799B270D1328008CEB0C /* Extension+String.swift */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
 		F40044612706969400B910F2 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F400445F2706969400B910F2 /* SignInViewController.xib */; };
 		F43D03732707C6A9005A536B /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D03712707C6A9005A536B /* NewPostViewController.swift */; };
@@ -49,6 +51,8 @@
 		901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		901BEFA22707E04800B822D3 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		903BC9C22706891200A4DE91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		90D97999270D10D0008CEB0C /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		90D9799B270D1328008CEB0C /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		9CEBD9D3E5B1AE95DB31D923 /* Pods_Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE51D86919D49B308DA88BA7 /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
 		F400445E2706969400B910F2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,23 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		90D97997270D0FE2008CEB0C /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				90D97998270D102F008CEB0C /* Extensions */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
+		90D97998270D102F008CEB0C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				90D97999270D10D0008CEB0C /* Extension+Date.swift */,
+				90D9799B270D1328008CEB0C /* Extension+String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F400445B2706964600B910F2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +249,7 @@
 		F45397F9270670F40088ACCD /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				90D97997270D0FE2008CEB0C /* Commons */,
 				903BC9C02706874B00A4DE91 /* Sources */,
 				903BC9C12706875100A4DE91 /* Scenes */,
 				903BC9BF2706870E00A4DE91 /* Resources */,
@@ -364,10 +386,12 @@
 				F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */,
 				F43D03732707C6A9005A536B /* NewPostViewController.swift in Sources */,
 				901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */,
+				90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */,
 				901BEF8E270751DF00B822D3 /* ProfileViewController.swift in Sources */,
 				901BEF912707A45000B822D3 /* LoginViewModel.swift in Sources */,
 				901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */,
 				901BEFA32707E04800B822D3 /* PostModel.swift in Sources */,
+				90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

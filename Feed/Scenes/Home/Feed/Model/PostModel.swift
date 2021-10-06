@@ -11,7 +11,8 @@ struct PostModel: Decodable {
     
     let message: String
     let userId: String
-    
+    let name: String
+    let date: String
 }
 
 struct UserModel: Decodable {

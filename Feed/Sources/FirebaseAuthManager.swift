@@ -59,6 +59,10 @@ class FirebaseAuthManager {
                         completion(nil)
                     }
                 }
+                
+                UserSession.shared.name = name
+                UserSession.shared.email = email
+                
             }
         }
     }
@@ -66,4 +70,5 @@ class FirebaseAuthManager {
     static func logout() {
         try? Auth.auth().signOut()
     }
+ 
 }

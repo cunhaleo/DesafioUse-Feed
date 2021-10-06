@@ -13,6 +13,7 @@ class FeedViewController: UIViewController {
     private let db = Firestore.firestore()
     private var posts: [PostModel] = []
     private var users: [String] = []
+    
     let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
@@ -42,22 +43,21 @@ class FeedViewController: UIViewController {
     }
     
     private func stractPosts() {
+        let ordenedPosts: [PostModel]?
         db.collection("Posts").getDocuments { query, error in
             if error != nil {
                 print(error?.localizedDescription)
             }else{
                 self.posts.removeAll()
-                self.users.removeAll()
                 for document in query?.documents ?? []{
                     let dict = document.data()
                     let message = dict["message"] as? String ?? ""
                     let userId = dict["userId"] as? String ?? ""
-                    self.stractUsernames(userId)
-                    let model = PostModel(message: message, userId: userId)
+                    let name = dict["name"] as? String ?? ""
+                    let date = dict["date"] as? String ?? ""
+                    let model = PostModel(message: message, userId: userId, name: name, date: date)
                     self.posts.append(model)
-                    
                 }
-                
                 
             }
         }
@@ -92,14 +92,10 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
-            if self.posts.count == self.users.count{
                 let post = posts[indexPath.row]
-                let username = users[indexPath.row]
-                cell.setup(name: username, date: "Sexta Feira", post: post.message)
+            cell.setup(name: post.name, date: post.date, post: post.message)
 
             return cell
-            }
-            return UITableViewCell()
         }else{
             return UITableViewCell()
         }
