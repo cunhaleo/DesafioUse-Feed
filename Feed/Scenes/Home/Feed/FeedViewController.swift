@@ -17,13 +17,17 @@ class FeedViewController: UIViewController {
     let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var refreshing: UIScreenEdgePanGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        
         stractPosts()
         refreshPosts()
+        setupTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     func refreshPosts() {
@@ -43,12 +47,14 @@ class FeedViewController: UIViewController {
     }
     
     private func stractPosts() {
-        let ordenedPosts: [PostModel]?
+        
+
         db.collection("Posts").getDocuments { query, error in
+            var ordenedPosts: [PostModel] = []
             if error != nil {
                 print(error?.localizedDescription)
             }else{
-                self.posts.removeAll()
+                ordenedPosts.removeAll()
                 for document in query?.documents ?? []{
                     let dict = document.data()
                     let message = dict["message"] as? String ?? ""
@@ -56,29 +62,18 @@ class FeedViewController: UIViewController {
                     let name = dict["name"] as? String ?? ""
                     let date = dict["date"] as? String ?? ""
                     let model = PostModel(message: message, userId: userId, name: name, date: date)
-                    self.posts.append(model)
+                    ordenedPosts.append(model)
                 }
+                self.posts = ordenedPosts.sorted(by: { (first: PostModel, second: PostModel) -> Bool in
+                    first.date < second.date
+                })
                 
+//                print("ORDENED POST ==> \(self.ordenedPosts) <==" )
             }
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
         
-    }
-    private func stractUsernames(_ userId: String) {
-            
-        db.collection("users").document(userId).getDocument() { (document, err) in //Pegando name com ID do usuario
-        if let err = err {
-            print(err.localizedDescription)
-            }else {
-                let dict = document?.data() ?? [:]
-                let name = dict["name"] as? String ?? ""
-                self.users.append(name)
-                print(self.users)
-                
-            }
-            
-        self.tableView.reloadData()
-        self.refreshControl.endRefreshing()
-        }
     }
 }
 

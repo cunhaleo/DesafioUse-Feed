@@ -8,20 +8,18 @@
 import Foundation
 
 public extension String {
-
+    
     func getLettersInitiais() -> String {
-        
         let unitaryNames = self.split(separator: " ")
+        var initialLetters = "?"
         
         if let firstName = unitaryNames.first?.description,
            let lastName = unitaryNames.last?.description {
-            
             let char1 = firstName.first?.description ?? ""
             let char2 = lastName.first?.description ?? ""
-            
-            return char1.uppercased() + char2.uppercased()
+            initialLetters = char1.uppercased() + char2.uppercased()
         }
-        return "?"
+        return initialLetters
     }
     
     func capitalizingFirstLetter() -> String {
