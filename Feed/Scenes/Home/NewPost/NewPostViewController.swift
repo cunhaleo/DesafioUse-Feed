@@ -17,6 +17,7 @@ class NewPostViewController: UIViewController {
     @IBOutlet weak var labelUserName: UILabel!
     @IBOutlet weak var labelInitialsName: UILabel!
     @IBOutlet weak var textFieldNewPost: UITextField!
+    @IBOutlet weak var buttonPublish: UIButton!
     
     // MARK: Overrides
     override func viewDidLoad() {
@@ -55,5 +56,19 @@ class NewPostViewController: UIViewController {
         
         labelUserName.text = name
         labelInitialsName.text = initialLettersName
+        textFieldNewPost.addTarget(self, action: #selector(textFieldIsReady), for: .editingChanged)
+    }
+    
+    @objc func textFieldIsReady () {
+        let message = textFieldNewPost.text ?? ""
+        
+        if message.count >= 10 {
+            buttonPublish.backgroundColor = .systemYellow
+            buttonPublish.titleLabel?.textColor = .black
+        }
+        else{
+            buttonPublish.backgroundColor = .lightGray
+            buttonPublish.titleLabel?.textColor = .white
+        }
     }
 }
