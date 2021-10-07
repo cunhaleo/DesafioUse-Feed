@@ -33,6 +33,9 @@ class NewPostViewController: UIViewController {
 
         guard message.count > 10 else { return }
         
+        buttonPublish.backgroundColor = .lightGray
+        buttonPublish.titleLabel?.textColor = .white
+        
         db.collection("Posts").addDocument(data: [
             "message" : message,
             "userId" : userId,
@@ -51,6 +54,7 @@ class NewPostViewController: UIViewController {
     
     // MARK: Methods 
     func setupUI() {
+        self.tabBarController?.title = "Nova postagem"
         guard let name = UserSession.shared.name else {return}
         let initialLettersName = name.getLettersInitiais()
         

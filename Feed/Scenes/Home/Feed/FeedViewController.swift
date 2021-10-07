@@ -21,6 +21,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
         stractPosts()
         refreshPosts()
         setupTableView()
@@ -28,6 +29,10 @@ class FeedViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
+    }
+    
+    func setupUI() {
+        self.tabBarController?.title = "Feed"
     }
     
     func refreshPosts() {
@@ -39,6 +44,7 @@ class FeedViewController: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         stractPosts()
     }
+    
     func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -47,7 +53,6 @@ class FeedViewController: UIViewController {
     }
     
     private func stractPosts() {
-        
 
         db.collection("Posts").getDocuments { query, error in
             var ordenedPosts: [PostModel] = []
@@ -67,13 +72,10 @@ class FeedViewController: UIViewController {
                 self.posts = ordenedPosts.sorted(by: { (first: PostModel, second: PostModel) -> Bool in
                     first.date < second.date
                 })
-                
-//                print("ORDENED POST ==> \(self.ordenedPosts) <==" )
             }
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
         }
-        
     }
 }
 

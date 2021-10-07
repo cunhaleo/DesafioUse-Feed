@@ -36,12 +36,12 @@ class ProfileViewController: UIViewController {
     
     func setupUI() {
         let nome = UserSession.shared.name
-        title = "Perfil"
+        
+        self.tabBarController?.title = "Perfil"
         labelName.text = nome
         labelInitials.text = nome?.getLettersInitiais()
         viewInitials.layer.cornerRadius = 60
         
     }
-
 }
     
