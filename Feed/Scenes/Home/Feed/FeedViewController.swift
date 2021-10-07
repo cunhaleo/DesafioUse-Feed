@@ -65,8 +65,9 @@ class FeedViewController: UIViewController {
                     let message = dict["message"] as? String ?? ""
                     let userId = dict["userId"] as? String ?? ""
                     let name = dict["name"] as? String ?? ""
-                    let date = dict["date"] as? String ?? ""
-                    let model = PostModel(message: message, userId: userId, name: name, date: date)
+                    let formattedDate = dict["formattedDate"] as? String ?? ""
+                    let dateForOrganizing = dict["date"] as? Date ?? Date()
+                    let model = PostModel(message: message, userId: userId, name: name, date: dateForOrganizing, formattedDate: formattedDate)
                     ordenedPosts.append(model)
                 }
                 self.posts = ordenedPosts.sorted(by: { (first: PostModel, second: PostModel) -> Bool in
@@ -90,7 +91,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
                 let post = posts[indexPath.row]
-            cell.setup(name: post.name, date: post.date, post: post.message)
+            cell.setup(name: post.name, date: post.formattedDate, post: post.message)
 
             return cell
         }else{

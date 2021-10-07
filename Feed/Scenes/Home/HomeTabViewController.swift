@@ -42,8 +42,8 @@ class HomeTabViewController: UITabBarController {
     }
     
     func setupTabBarUI() {
-        tabBarController?.tabBar.backgroundColor = .systemYellow
-        tabBarController?.tabBar.tintColor = .black
+        self.tabBar.unselectedItemTintColor = .lightGray
+        self.tabBar.tintColor = .systemYellow
         
     }
 }
