@@ -66,14 +66,14 @@ class FeedViewController: UIViewController {
                     let userId = dict["userId"] as? String ?? ""
                     let name = dict["name"] as? String ?? ""
                     let formattedDate = dict["formattedDate"] as? String ?? ""
-                    let dateForOrganizing = dict["date"] as? Date ?? Date()
+                    let dateStamp = dict["date"] as? Timestamp ?? Timestamp()
+                    let dateForOrganizing = dateStamp.dateValue()
                     let model = PostModel(message: message, userId: userId, name: name, date: dateForOrganizing, formattedDate: formattedDate)
                     ordenedPosts.append(model)
                 }
-                self.posts = ordenedPosts.sorted(by: { (first: PostModel, second: PostModel) -> Bool in
-                    first.date < second.date
-                })
-            }
+                ordenedPosts.sort(by: {$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
+                self.posts = ordenedPosts
+           }
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
         }

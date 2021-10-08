@@ -29,7 +29,6 @@ class NewPostViewController: UIViewController {
     @IBAction func handlerButtonPublish(_ sender: Any) {
         let message = textFieldNewPost.text ?? ""
         let userId = Auth.auth().currentUser?.uid
-        let date = Date()
 
         guard message.count > 10 else { return }
         
@@ -41,8 +40,8 @@ class NewPostViewController: UIViewController {
             "message" : message,
             "userId" : userId,
             "name" : UserSession.shared.name,
-            "formattedDate" : date.getFormattedDate(format: .EEEEasHHmm).capitalizingFirstLetter(),
-            "date" : date
+            "formattedDate" : Date().getFormattedDate(format: .EEEEasHHmm).capitalizingFirstLetter(),
+            "date" : Date()
             
         ]) { (error) in
             if error != nil {
