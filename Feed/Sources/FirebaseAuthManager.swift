@@ -59,6 +59,9 @@ class FirebaseAuthManager {
                         completion(nil)
                     }
                 }
+                
+                UserSession.shared.name = name
+                UserSession.shared.email = email
             }
         }
     }

@@ -57,11 +57,20 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
         let viewController = HomeTabViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar
-        print("Usuario logado")
         
     }
     
     func setupNavigation() {
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            appearance.backgroundColor = .systemYellow
+            UINavigationBar.appearance().standardAppearance = appearance;
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
+        }
         
         navigationController?.navigationBar.barTintColor = .systemYellow
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]

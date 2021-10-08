@@ -13,16 +13,26 @@ class FeedViewController: UIViewController {
     private let db = Firestore.firestore()
     private var posts: [PostModel] = []
     private var users: [String] = []
+    
     let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var refreshing: UIScreenEdgePanGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        
+        setupUI()
         stractPosts()
         refreshPosts()
+        setupTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
+    func setupUI() {
+        self.tabBarController?.title = "Feed"
     }
     
     func refreshPosts() {
@@ -34,6 +44,7 @@ class FeedViewController: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         stractPosts()
     }
+    
     func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -42,42 +53,29 @@ class FeedViewController: UIViewController {
     }
     
     private func stractPosts() {
+
         db.collection("Posts").getDocuments { query, error in
+            var ordenedPosts: [PostModel] = []
             if error != nil {
                 print(error?.localizedDescription)
             }else{
-                self.posts.removeAll()
-                self.users.removeAll()
+                ordenedPosts.removeAll()
                 for document in query?.documents ?? []{
                     let dict = document.data()
                     let message = dict["message"] as? String ?? ""
                     let userId = dict["userId"] as? String ?? ""
-                    self.stractUsernames(userId)
-                    let model = PostModel(message: message, userId: userId)
-                    self.posts.append(model)
-                    
+                    let name = dict["name"] as? String ?? ""
+                    let formattedDate = dict["formattedDate"] as? String ?? ""
+                    let dateStamp = dict["date"] as? Timestamp ?? Timestamp()
+                    let dateForOrganizing = dateStamp.dateValue()
+                    let model = PostModel(message: message, userId: userId, name: name, date: dateForOrganizing, formattedDate: formattedDate)
+                    ordenedPosts.append(model)
                 }
-                
-                
-            }
-        }
-        
-    }
-    private func stractUsernames(_ userId: String) {
-            
-        db.collection("users").document(userId).getDocument() { (document, err) in //Pegando name com ID do usuario
-        if let err = err {
-            print(err.localizedDescription)
-            }else {
-                let dict = document?.data() ?? [:]
-                let name = dict["name"] as? String ?? ""
-                self.users.append(name)
-                print(self.users)
-                
-            }
-            
-        self.tableView.reloadData()
-        self.refreshControl.endRefreshing()
+                ordenedPosts.sort(by: {$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
+                self.posts = ordenedPosts
+           }
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
 }
@@ -92,14 +90,10 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
-            if self.posts.count == self.users.count{
                 let post = posts[indexPath.row]
-                let username = users[indexPath.row]
-                cell.setup(name: username, date: "Sexta Feira", post: post.message)
+            cell.setup(name: post.name, date: post.formattedDate, post: post.message)
 
             return cell
-            }
-            return UITableViewCell()
         }else{
             return UITableViewCell()
         }

@@ -18,10 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        setupNavigationController()
         setupRootViewController()
+        
       
         return true
     }
+    
         private func setupRootViewController() {
             var viewController: UIViewController = SignInViewController()
             
@@ -35,7 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = navBar
             window?.makeKeyAndVisible()
         }
-
+    
+    func setupNavigationController() {
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            appearance.backgroundColor = .systemYellow
+            UINavigationBar.appearance().standardAppearance = appearance;
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+    }
 }
 
 

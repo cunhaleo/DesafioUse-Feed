@@ -9,6 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var labelInitials: UILabel!
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var viewInitials: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -31,8 +35,13 @@ class ProfileViewController: UIViewController {
     //MARK: - Methods
     
     func setupUI() {
-        title = "Perfil"
-
+        let nome = UserSession.shared.name
+        
+        self.tabBarController?.title = "Perfil"
+        labelName.text = nome
+        labelInitials.text = nome?.getLettersInitiais()
+        viewInitials.layer.cornerRadius = 60
+        
     }
 }
     
