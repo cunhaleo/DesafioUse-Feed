@@ -11,11 +11,11 @@ import FirebaseFirestore
 class FeedViewController: UIViewController {
     
     private let db = Firestore.firestore()
-    private var posts: [PostModel] = []
+    @Published private var posts: [PostModel] = []
     private var users: [String] = []
     
     let refreshControl = UIRefreshControl()
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -53,27 +53,19 @@ class FeedViewController: UIViewController {
     }
     
     private func stractPosts() {
-
-        db.collection("Posts").getDocuments { query, error in
-            var ordenedPosts: [PostModel] = []
-            if error != nil {
-                print(error?.localizedDescription)
-            }else{
+        var ordenedPosts: [PostModel] = []
+        Task {
+            do {
+                let postCollection = try await db.collection("Posts").getDocuments()
                 ordenedPosts.removeAll()
-                for document in query?.documents ?? []{
-                    let dict = document.data()
-                    let message = dict["message"] as? String ?? ""
-                    let userId = dict["userId"] as? String ?? ""
-                    let name = dict["name"] as? String ?? ""
-                    let formattedDate = dict["formattedDate"] as? String ?? ""
-                    let dateStamp = dict["date"] as? Timestamp ?? Timestamp()
-                    let dateForOrganizing = dateStamp.dateValue()
-                    let model = PostModel(message: message, userId: userId, name: name, date: dateForOrganizing, formattedDate: formattedDate)
-                    ordenedPosts.append(model)
+                for document in postCollection.documents {
+                    let post = try document.data(as: PostModel.self)
+                    ordenedPosts.append(post)
                 }
-                ordenedPosts.sort(by: {$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
-                self.posts = ordenedPosts
-           }
+            }
+            
+            ordenedPosts.sort(by: {$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
+            posts = ordenedPosts
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
         }
@@ -82,7 +74,7 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         posts.count
     }
@@ -90,9 +82,9 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
-                let post = posts[indexPath.row]
+            let post = posts[indexPath.row]
             cell.setup(name: post.name, date: post.formattedDate, post: post.message)
-
+            
             return cell
         }else{
             return UITableViewCell()
