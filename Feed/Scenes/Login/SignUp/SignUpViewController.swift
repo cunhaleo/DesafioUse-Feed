@@ -13,7 +13,6 @@ class SignUpViewController: UIViewController {
     // MARK: - Variables & Attributes
     let db = Firestore.firestore()
     
-    
     // MARK: - Outlets
     
     @IBOutlet weak var textFieldEmail: UITextField!
@@ -22,13 +21,11 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var textFieldConfirmPassword: UITextField!
     
     //MARK: - Overrides
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-
-
 
     //MARK: - Actions
     
@@ -53,6 +50,7 @@ class SignUpViewController: UIViewController {
             }
         }
     }
+    
     //MARK: - Methods
     
      private func validateFields(name: String, email: String, password: String, confirmPassword: String) -> Bool {
@@ -75,6 +73,7 @@ class SignUpViewController: UIViewController {
         
         return isValid
     }
+    
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
