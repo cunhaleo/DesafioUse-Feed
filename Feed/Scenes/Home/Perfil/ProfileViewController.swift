@@ -25,8 +25,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func buttonLogout(_ sender: Any) {
-        UserSession.shared.logout()
-        
+        FirebaseAuthManager.logout()
         let viewController = SignInViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar

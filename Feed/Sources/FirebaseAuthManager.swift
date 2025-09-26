@@ -12,31 +12,30 @@ import FirebaseFirestore
 class FirebaseAuthManager {
     
     // MARK: Properties
-    let db = Firestore.firestore()
+    private static let db = Firestore.firestore()
+    private static let userSession = UserSession.shared
+    
     
     // MARK: Methods
-    static func signIn(email: String, password: String, completion: @escaping (Error?) -> Void) {
-        
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if error != nil {
-                completion(error)
+    static func signIn(email: String, password: String) async throws {
+            do {
+                let result = try await Auth.auth().signIn(withEmail: email, password: password)
+                let userId = result.user.uid
+                let user = try await getUserDocument(userId: userId)
+                userSession.startSession(name: user.name, email: user.email)
+            } catch {
+                throw error
             }
-            else {
-                guard let userId = authResult?.user.uid else {return}
-                
-                let db = Firestore.firestore()
-                db.collection("users").document(userId).getDocument() { (document, err) in //Pegando documento com ID do usuario
-                    if let err = err {
-                        completion(err)
-                    } else {
-                        let dict = document?.data()
-                        UserSession.shared.name = dict?["name"] as? String
-                        UserSession.shared.email = dict?["email"] as? String
-                        
-                        completion(nil)
-                    }
-                }
-            }
+        }
+    
+    
+    static private func getUserDocument(userId: String) async throws -> UserModel {
+        do {
+            let document = try await db.collection("users").document(userId).getDocument()
+            let user = try document.data(as: UserModel.self)
+            return user
+        } catch {
+            throw error
         }
     }
     
@@ -48,7 +47,6 @@ class FirebaseAuthManager {
             else {
                 guard let userId = authResult?.user.uid else {return}
                 
-                let db = Firestore.firestore()
                 db.collection("users").document(userId).setData([
                     "name": name,
                     "email": email
@@ -68,5 +66,6 @@ class FirebaseAuthManager {
     
     static func logout() {
         try? Auth.auth().signOut()
+        userSession.finishSession()
     }
 }

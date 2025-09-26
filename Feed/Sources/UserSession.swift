@@ -28,9 +28,13 @@ class UserSession {
         }
     }
     
-    func logout() {
+    func finishSession() {
         name = nil
         email = nil
-        FirebaseAuthManager.logout()
+    }
+    
+    func startSession(name: String, email: String) {
+        self.name = name
+        self.email = email
     }
 }

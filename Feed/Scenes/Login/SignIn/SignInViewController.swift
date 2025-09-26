@@ -14,7 +14,7 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
     
     
     // MARK: - Outlets
-
+    
     @IBOutlet weak var textFieldEmail: UITextField!
     
     @IBOutlet weak var textFieldPassword: UITextField!
@@ -25,35 +25,38 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
         setupUI()
         setupNavigation()
     }
+    
     // MARK: - Actions
     
     @IBAction func buttonCadastrar(_ sender: Any) {
         let viewController = SignUpViewController()
         navigationController?.pushViewController(viewController, animated: true)
-        }
-
+    }
+    
     @IBAction func buttonEntry(_ sender: Any) {
+        tappedLogin()
+    }
+    
+    // MARK: - Methods
+    private func tappedLogin() {
         guard let email = textFieldEmail.text, let password = textFieldPassword.text else { return }
-        
-        
-        FirebaseAuthManager.signIn(email: email, password: password) { error in
-            if error != nil {
-                print("==> Error: \(error?.localizedDescription)")
-                self.showAlert(title: "Erro", message: "Login inválido!")
-            }
-            else {
+        Task {
+            do {
+                try await FirebaseAuthManager.signIn(email: email, password: password)
                 self.openHome()
+            }
+            catch  {
+                self.showAlert(title: "Erro", message: error.localizedDescription)
             }
         }
     }
     
-    // MARK: - Methods
     private func setupUI () {
         title = "Fazer login"
         
     }
     
-    private func openHome() {
+    @MainActor private func openHome() {
         let viewController = HomeTabViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar
@@ -69,7 +72,7 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
             appearance.backgroundColor = .systemYellow
             UINavigationBar.appearance().standardAppearance = appearance;
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
-
+            
         }
         
         navigationController?.navigationBar.barTintColor = .systemYellow
@@ -82,7 +85,7 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
         let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(buttonOk)
         present(alert, animated: true, completion: nil)
-        }
-        
-
+    }
+    
+    
 }

@@ -19,5 +19,6 @@ struct PostModel: Decodable {
 struct UserModel: Decodable {
     
     let name: String
+    let email: String
     
 }
