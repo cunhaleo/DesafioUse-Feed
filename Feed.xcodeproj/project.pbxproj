@@ -23,6 +23,7 @@
 		901BEFA32707E04800B822D3 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEFA22707E04800B822D3 /* PostModel.swift */; };
 		9063FCE32E848B9000558C0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9063FCE22E848B9000558C0B /* GoogleService-Info.plist */; };
 		9063FCE52E85AE9900558C0B /* AssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE42E85AE8D00558C0B /* AssetsManager.swift */; };
+		9063FCE82E87082400558C0B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE72E87081E00558C0B /* UserModel.swift */; };
 		90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D97999270D10D0008CEB0C /* Extension+Date.swift */; };
 		90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D9799B270D1328008CEB0C /* Extension+String.swift */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
@@ -50,6 +51,7 @@
 		901BEFA22707E04800B822D3 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		9063FCE22E848B9000558C0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9063FCE42E85AE8D00558C0B /* AssetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsManager.swift; sourceTree = "<group>"; };
+		9063FCE72E87081E00558C0B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		90D97999270D10D0008CEB0C /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		90D9799B270D1328008CEB0C /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		9475A1F7319B8064837D8BDC /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
@@ -168,9 +170,10 @@
 		903BC9C02706874B00A4DE91 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				9063FCE72E87081E00558C0B /* UserModel.swift */,
+				901BEF852707446400B822D3 /* UserSession.swift */,
 				F45397FA270670F40088ACCD /* AppDelegate.swift */,
 				901BEF832707442800B822D3 /* FirebaseAuthManager.swift */,
-				901BEF852707446400B822D3 /* UserSession.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				901BEF8E270751DF00B822D3 /* ProfileViewController.swift in Sources */,
 				901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */,
 				901BEFA32707E04800B822D3 /* PostModel.swift in Sources */,
+				9063FCE82E87082400558C0B /* UserModel.swift in Sources */,
 				90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

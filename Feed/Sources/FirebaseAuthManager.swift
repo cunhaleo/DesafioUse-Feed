@@ -28,7 +28,6 @@ class FirebaseAuthManager {
         }
     }
     
-    
     static private func getUserDocument(userId: String) async throws -> UserModel {
         do {
             let document = try await db.collection("users").document(userId).getDocument()

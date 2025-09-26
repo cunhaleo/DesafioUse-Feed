@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 
-class FeedViewController: UIViewController {
+final class FeedViewController: UIViewController {
     
     private let db = Firestore.firestore()
     @Published private var posts: [PostModel] = []
@@ -22,9 +22,9 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        stractPosts()
-        refreshPosts()
+        setupRefreshControl()
         setupTableView()
+        stractPosts()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,10 +32,10 @@ class FeedViewController: UIViewController {
     }
     
     func setupUI() {
-        self.tabBarController?.title = "Feed"
+        navigationController?.navigationItem.title = "Feed"
     }
     
-    func refreshPosts() {
+    func setupRefreshControl() {
         refreshControl.attributedTitle = NSAttributedString(string: "Atualizando")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
@@ -56,18 +56,22 @@ class FeedViewController: UIViewController {
         var ordenedPosts: [PostModel] = []
         Task {
             do {
-                let postCollection = try await db.collection("Posts").getDocuments()
                 ordenedPosts.removeAll()
+                let postCollection = try await db.collection("Posts").getDocuments()
+                
                 for document in postCollection.documents {
                     let post = try document.data(as: PostModel.self)
                     ordenedPosts.append(post)
                 }
+                ordenedPosts.sort(by: {$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
+                posts = ordenedPosts
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
-            
-            ordenedPosts.sort(by: {$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
-            posts = ordenedPosts
-            self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
+            catch {
+                refreshControl.endRefreshing()
+                print("===> ERROR: \(error.localizedDescription)") // TODO: ADD ERROR HANDLER
+            }
         }
     }
 }
