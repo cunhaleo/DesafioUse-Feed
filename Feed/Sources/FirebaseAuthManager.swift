@@ -18,15 +18,15 @@ class FirebaseAuthManager {
     
     // MARK: Methods
     static func signIn(email: String, password: String) async throws {
-            do {
-                let result = try await Auth.auth().signIn(withEmail: email, password: password)
-                let userId = result.user.uid
-                let user = try await getUserDocument(userId: userId)
-                userSession.startSession(name: user.name, email: user.email)
-            } catch {
-                throw error
-            }
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            let userId = result.user.uid
+            let user = try await getUserDocument(userId: userId)
+            userSession.startSession(name: user.name, email: user.email)
+        } catch {
+            throw error
         }
+    }
     
     
     static private func getUserDocument(userId: String) async throws -> UserModel {
@@ -39,28 +39,17 @@ class FirebaseAuthManager {
         }
     }
     
-    static func createAccount(name: String, email: String, password: String, completion: @escaping (Error?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if error != nil {
-                completion(error)
-            }
-            else {
-                guard let userId = authResult?.user.uid else {return}
-                
-                db.collection("users").document(userId).setData([
-                    "name": name,
-                    "email": email
-                ]) { err in
-                    if let err = err {
-                        completion(err)
-                    } else {
-                        completion(nil)
-                    }
-                }
-                
-                UserSession.shared.name = name
-                UserSession.shared.email = email
-            }
+    static func createAccount(name: String, email: String, password: String) async throws {
+        do {
+            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            let userId = result.user.uid
+            try await db.collection("users").document(userId).setData([
+                "name": name,
+                "email": email
+            ])
+            userSession.startSession(name: name, email: email)
+        } catch {
+            throw error
         }
     }
     

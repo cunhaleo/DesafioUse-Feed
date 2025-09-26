@@ -8,13 +8,9 @@
 import UIKit
 import FirebaseFirestore
 
-class SignUpViewController: UIViewController {
-    
-    // MARK: - Variables & Attributes
-    let db = Firestore.firestore()
+final class SignUpViewController: UIViewController {
     
     // MARK: - Outlets
-    
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
@@ -38,21 +34,20 @@ class SignUpViewController: UIViewController {
         else { return }
         
         if validateFields(name: name, email: email, password: password, confirmPassword: confirmPassword) {
-            
-            FirebaseAuthManager.createAccount(name: name, email: email, password: password) { error in
-                if error != nil {
-                    print("==> Error: \(error?.localizedDescription)")
-                }
-                else {
-                    self.showAlert(title: "Sucesso", message: "Cadastro realizado.")
-                    self.openHome()
+            Task {
+                do {
+                    try await FirebaseAuthManager.createAccount(name: name, email: email, password: password)
+                    self.showAlert(title: "Sucesso", message: "Cadastro realizado.") {
+                        self.openHome()
+                    }
+                } catch {
+                    showAlert(title: "Erro", message: error.localizedDescription)
                 }
             }
         }
     }
     
     //MARK: - Methods
-    
      private func validateFields(name: String, email: String, password: String, confirmPassword: String) -> Bool {
         var isValid = true
         
@@ -74,11 +69,13 @@ class SignUpViewController: UIViewController {
         return isValid
     }
     
-    private func showAlert(title: String, message: String) {
+    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: { action in
+            completion?()
+        })
         alert.addAction(buttonOk)
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
     }
     func setupUI(){
         title = "Registrar-se"
