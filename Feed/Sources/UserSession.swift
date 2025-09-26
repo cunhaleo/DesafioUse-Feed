@@ -7,11 +7,11 @@
 
 import Foundation
 
-class UserSession {
+final class UserSession {
     
     static let shared = UserSession()
     
-    var name: String? {
+    private(set) var name: String? {
         get{
             UserDefaults.standard.string(forKey: "keyName")
         }
@@ -19,7 +19,7 @@ class UserSession {
             UserDefaults.standard.setValue(newValue, forKey: "keyName")
         }
     }
-    var email: String? {
+    private(set) var email: String? {
         get{
             UserDefaults.standard.string(forKey: "keyEmail")
         }

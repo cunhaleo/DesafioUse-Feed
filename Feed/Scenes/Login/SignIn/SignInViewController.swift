@@ -8,15 +8,10 @@
 import UIKit
 import FirebaseAuth
 
-class SignInViewController: UIViewController, UINavigationControllerDelegate {
-    
-    // MARK: - Variables & Attributes
-    
+final class SignInViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - Outlets
-    
     @IBOutlet weak var textFieldEmail: UITextField!
-    
     @IBOutlet weak var textFieldPassword: UITextField!
     
     // MARK: - Overrides
@@ -27,7 +22,6 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     // MARK: - Actions
-    
     @IBAction func buttonCadastrar(_ sender: Any) {
         let viewController = SignUpViewController()
         navigationController?.pushViewController(viewController, animated: true)
@@ -39,7 +33,9 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - Methods
     private func tappedLogin() {
-        guard let email = textFieldEmail.text, let password = textFieldPassword.text else { return }
+        guard let email = textFieldEmail.text,
+              let password = textFieldPassword.text else { return }
+        
         Task {
             do {
                 try await FirebaseAuthManager.signIn(email: email, password: password)
@@ -53,7 +49,6 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
     
     private func setupUI () {
         title = "Fazer login"
-        
     }
     
     @MainActor private func openHome() {
@@ -72,7 +67,6 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
             appearance.backgroundColor = .systemYellow
             UINavigationBar.appearance().standardAppearance = appearance;
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            
         }
         
         navigationController?.navigationBar.barTintColor = .systemYellow
@@ -86,6 +80,4 @@ class SignInViewController: UIViewController, UINavigationControllerDelegate {
         alert.addAction(buttonOk)
         present(alert, animated: true, completion: nil)
     }
-    
-    
 }

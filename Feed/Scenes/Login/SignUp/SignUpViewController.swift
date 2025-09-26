@@ -17,14 +17,12 @@ final class SignUpViewController: UIViewController {
     @IBOutlet weak var textFieldConfirmPassword: UITextField!
     
     //MARK: - Overrides
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
 
     //MARK: - Actions
-    
     @IBAction func buttonRegister(_ sender: Any) {
         
         guard let name = textFieldName.text,
@@ -37,8 +35,8 @@ final class SignUpViewController: UIViewController {
             Task {
                 do {
                     try await FirebaseAuthManager.createAccount(name: name, email: email, password: password)
-                    self.showAlert(title: "Sucesso", message: "Cadastro realizado.") {
-                        self.openHome()
+                    self.showAlert(title: "Sucesso", message: "Cadastro realizado.") { [weak self] in
+                        self?.openHome()
                     }
                 } catch {
                     showAlert(title: "Erro", message: error.localizedDescription)
@@ -77,6 +75,7 @@ final class SignUpViewController: UIViewController {
         alert.addAction(buttonOk)
         present(alert, animated: true)
     }
+    
     func setupUI(){
         title = "Registrar-se"
     }
