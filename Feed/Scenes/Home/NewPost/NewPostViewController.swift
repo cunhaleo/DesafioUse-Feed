@@ -9,7 +9,7 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class NewPostViewController: UIViewController {
+final class NewPostViewController: UIViewController {
     // MARK: - Variables & Attributes
     private let db = Firestore.firestore()
     
@@ -25,55 +25,67 @@ class NewPostViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = "Nova Publicação"
+    }
+    
     // MARK: Actions
     @IBAction func handlerButtonPublish(_ sender: Any) {
         let message = textFieldNewPost.text ?? ""
-        let userId = Auth.auth().currentUser?.uid
-
-        guard message.count > 10 else { return }
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        guard let name = UserSession.shared.name else { return }
+        let date = Date()
+        let formattedDate = Date().getFormattedDate(format: .EEEEasHHmm).capitalizingFirstLetter()
         
-        buttonPublish.backgroundColor = .lightGray
-        buttonPublish.titleLabel?.textColor = .white
-        
-        db.collection("Posts").addDocument(data: [
-            
-            "message" : message,
-            "userId" : userId,
-            "name" : UserSession.shared.name,
-            "formattedDate" : Date().getFormattedDate(format: .EEEEasHHmm).capitalizingFirstLetter(),
-            "date" : Date()
-            
-        ]) { (error) in
-            if error != nil {
-                print(error)
-            } else {
-                self.textFieldNewPost.text = ""
+        let newPost = PostModel(message: message,
+                                userId: userId,
+                                name: name,
+                                date: date,
+                                formattedDate: formattedDate)
+        Task {
+            do {
+                try await performPost(post: newPost)
+            }
+            catch {
+                print("===> ERROR: \(error.localizedDescription)") //TODO: ERROR HANDLER
             }
         }
         
     }
     
-    // MARK: Methods 
+    // MARK: Methods
     func setupUI() {
-        self.tabBarController?.title = "Nova postagem"
-        guard let name = UserSession.shared.name else {return}
+        guard let name = UserSession.shared.name else { return }
         let initialLettersName = name.getLettersInitiais()
         
         labelUserName.text = name
         labelInitialsName.text = initialLettersName
-        textFieldNewPost.addTarget(self, action: #selector(textFieldIsReady), for: .editingChanged)
+        buttonPublish.layer.cornerRadius = 8
+        textFieldNewPost.addTarget(self, action: #selector(changePostButtonUI), for: .editingChanged)
     }
     
-    @objc func textFieldIsReady () {
+    @objc func changePostButtonUI () {
         let message = textFieldNewPost.text ?? ""
+        let isEnabled = message.count >= 10
         
-        if message.count >= 10 {
-            buttonPublish.backgroundColor = .systemYellow
-            buttonPublish.titleLabel?.textColor = .black
+        buttonPublish.isEnabled = isEnabled
+        buttonPublish.backgroundColor = isEnabled ? .systemYellow : .lightGray
+        buttonPublish.setTitleColor(.black, for: .normal)
+        buttonPublish.setTitleColor(.white, for: .disabled)
+    }
+    
+    private func performPost(post: PostModel) async throws {
+        do {
+            try await db.collection("Posts").addDocument(data: [
+                "message" : post.message,
+                "userId" : post.userId,
+                "name" : post.name,
+                "formattedDate" : post.formattedDate,
+                "date" : post.date
+            ])
         }
-        else{
-            buttonPublish.backgroundColor = .lightGray
-            buttonPublish.titleLabel?.textColor = .white
+        catch {
+            throw error
         }
     }
 }

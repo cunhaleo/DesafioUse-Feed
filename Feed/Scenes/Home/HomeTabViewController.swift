@@ -7,43 +7,43 @@
 
 import UIKit
 
-class HomeTabViewController: UITabBarController {
+final class HomeTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTabBarUI()
         viewControllers = [
             createFeedViewController(),
             createNewPost(),
             createProfileViewController()
         ]
         selectedIndex = 0
+        setupTabBarUI()
     }
 
     func createNewPost() -> UIViewController{
         let viewController = NewPostViewController()
         viewController.tabBarItem.title = "Post"
-        viewController.tabBarItem.image = UIImage(named: "ico-new-post")
+        viewController.tabBarItem.image = AssetsManager.imageNewPost
         return viewController
     }
     
     func createFeedViewController() -> UIViewController{
         let viewController = FeedViewController()
         viewController.tabBarItem.title = "Feed"
-        viewController.tabBarItem.image = UIImage(named: "ico-feed")
+        viewController.tabBarItem.image = AssetsManager.imageFeed
         return viewController
     }
     
     func createProfileViewController() -> UIViewController{
         let viewController = ProfileViewController()
         viewController.tabBarItem.title = "Perfil"
-        viewController.tabBarItem.image = UIImage(named: "ico-profile")
+        viewController.tabBarItem.image = AssetsManager.imageProfile
         return viewController
     }
     
     func setupTabBarUI() {
-        self.tabBar.unselectedItemTintColor = .lightGray
-        self.tabBar.tintColor = .systemYellow
+        self.tabBar.unselectedItemTintColor = AssetsManager.colorSecondary
+        self.tabBar.tintColor = AssetsManager.colorPrimary
         
     }
 }

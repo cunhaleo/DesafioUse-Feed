@@ -8,35 +8,32 @@
 import UIKit
 import FirebaseFirestore
 
-class FeedViewController: UIViewController {
+final class FeedViewController: UIViewController {
     
     private let db = Firestore.firestore()
-    private var posts: [PostModel] = []
+    @Published private var posts: [PostModel] = []
     private var users: [String] = []
     
     let refreshControl = UIRefreshControl()
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupUI()
-        stractPosts()
-        refreshPosts()
+        setupRefreshControl()
         setupTableView()
+        stractPosts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = "Feed"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     
-    func setupUI() {
-        self.tabBarController?.title = "Feed"
-    }
-    
-    func refreshPosts() {
-        refreshControl.attributedTitle = NSAttributedString(string: "Atualizando")
+    func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
@@ -53,36 +50,32 @@ class FeedViewController: UIViewController {
     }
     
     private func stractPosts() {
-
-        db.collection("Posts").getDocuments { query, error in
-            var ordenedPosts: [PostModel] = []
-            if error != nil {
-                print(error?.localizedDescription)
-            }else{
+        var ordenedPosts: [PostModel] = []
+        Task {
+            do {
                 ordenedPosts.removeAll()
-                for document in query?.documents ?? []{
-                    let dict = document.data()
-                    let message = dict["message"] as? String ?? ""
-                    let userId = dict["userId"] as? String ?? ""
-                    let name = dict["name"] as? String ?? ""
-                    let formattedDate = dict["formattedDate"] as? String ?? ""
-                    let dateStamp = dict["date"] as? Timestamp ?? Timestamp()
-                    let dateForOrganizing = dateStamp.dateValue()
-                    let model = PostModel(message: message, userId: userId, name: name, date: dateForOrganizing, formattedDate: formattedDate)
-                    ordenedPosts.append(model)
+                let postCollection = try await db.collection("Posts").getDocuments()
+                
+                for document in postCollection.documents {
+                    let post = try document.data(as: PostModel.self)
+                    ordenedPosts.append(post)
                 }
                 ordenedPosts.sort(by: {$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
-                self.posts = ordenedPosts
-           }
-            self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
+                posts = ordenedPosts
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+            catch {
+                refreshControl.endRefreshing()
+                print("===> ERROR: \(error.localizedDescription)") // TODO: ADD ERROR HANDLER
+            }
         }
     }
 }
 
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         posts.count
     }
@@ -90,9 +83,9 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
-                let post = posts[indexPath.row]
+            let post = posts[indexPath.row]
             cell.setup(name: post.name, date: post.formattedDate, post: post.message)
-
+            
             return cell
         }else{
             return UITableViewCell()
