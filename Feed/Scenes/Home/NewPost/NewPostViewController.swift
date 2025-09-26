@@ -9,7 +9,7 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class NewPostViewController: UIViewController {
+final class NewPostViewController: UIViewController {
     // MARK: - Variables & Attributes
     private let db = Firestore.firestore()
     
@@ -23,6 +23,10 @@ class NewPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = "Nova Publicação"
     }
     
     // MARK: Actions
@@ -43,7 +47,7 @@ class NewPostViewController: UIViewController {
                 try await performPost(post: newPost)
             }
             catch {
-                print("===> ERROR: \(error.localizedDescription)")
+                print("===> ERROR: \(error.localizedDescription)") //TODO: ERROR HANDLER
             }
         }
         
@@ -51,7 +55,6 @@ class NewPostViewController: UIViewController {
     
     // MARK: Methods
     func setupUI() {
-        title = "Nova postagem"
         guard let name = UserSession.shared.name else { return }
         let initialLettersName = name.getLettersInitiais()
         

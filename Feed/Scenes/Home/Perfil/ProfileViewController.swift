@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
 
     @IBOutlet weak var labelInitials: UILabel!
     @IBOutlet weak var labelName: UILabel!
@@ -16,11 +16,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-
-        // Do any additional setup after loading the view.
     }
 
-   
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = "Perfil"
+    }
     
     // MARK: - Actions
     
@@ -34,11 +34,9 @@ class ProfileViewController: UIViewController {
     //MARK: - Methods
     
     func setupUI() {
-        let nome = UserSession.shared.name
-        
-        self.tabBarController?.title = "Perfil"
-        labelName.text = nome
-        labelInitials.text = nome?.getLettersInitiais()
+        let name = UserSession.shared.name
+        labelName.text = name
+        labelInitials.text = name?.getLettersInitiais()
         viewInitials.layer.cornerRadius = 60
         
     }

@@ -20,23 +20,20 @@ final class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupUI()
         setupRefreshControl()
         setupTableView()
         stractPosts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = "Feed"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     
-    func setupUI() {
-        navigationController?.navigationItem.title = "Feed"
-    }
-    
     func setupRefreshControl() {
-        refreshControl.attributedTitle = NSAttributedString(string: "Atualizando")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
