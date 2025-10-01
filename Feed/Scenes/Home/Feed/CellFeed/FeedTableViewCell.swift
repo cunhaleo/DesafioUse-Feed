@@ -13,8 +13,6 @@ final class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var labelIniciais: UILabel!
     @IBOutlet weak var labelData: UILabel!
     @IBOutlet weak var labelUser: UILabel!
-    @IBOutlet weak var labelLikes: UILabel!
-    @IBOutlet weak var labelComments: UILabel!
     
     func setup(name: String, date: String, post: String) {
         labelUser.text = name
