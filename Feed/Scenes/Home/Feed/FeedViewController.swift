@@ -85,7 +85,6 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
             let post = posts[indexPath.row]
             cell.setup(name: post.name, date: post.formattedDate, post: post.message)
-            
             return cell
         }else{
             return UITableViewCell()

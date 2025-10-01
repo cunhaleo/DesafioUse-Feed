@@ -80,7 +80,7 @@ final class SignUpViewController: UIViewController {
         title = "Registrar-se"
     }
     
-    private func openHome() {
+    @MainActor private func openHome() {
         let viewController = HomeTabViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar

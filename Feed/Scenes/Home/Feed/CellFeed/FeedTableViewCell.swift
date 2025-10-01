@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FeedTableViewCell: UITableViewCell {
+final class FeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelPost: UILabel!
     @IBOutlet weak var labelIniciais: UILabel!
@@ -15,15 +15,6 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var labelUser: UILabel!
     @IBOutlet weak var labelLikes: UILabel!
     @IBOutlet weak var labelComments: UILabel!
-
-    
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        // Initialization code
-    }
     
     func setup(name: String, date: String, post: String) {
         labelUser.text = name
