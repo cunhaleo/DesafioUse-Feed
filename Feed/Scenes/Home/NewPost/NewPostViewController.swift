@@ -19,8 +19,6 @@ final class NewPostViewController: UIViewController {
     @IBOutlet weak var labelInitialsName: UILabel!
     @IBOutlet weak var buttonPublish: UIButton!
     
-    private let placeholderText = "O que você está pensando hoje?"
-    
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +65,7 @@ final class NewPostViewController: UIViewController {
     }
     
     private func setupTextView() {
-        textViewNewPost.text = placeholderText
+        textViewNewPost.text = "O que você está pensando?"
         textViewNewPost.textColor = .lightGray
         textViewNewPost.layer.masksToBounds = true
         textViewNewPost.layer.cornerRadius = 8
