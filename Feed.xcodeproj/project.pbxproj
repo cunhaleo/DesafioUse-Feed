@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		470D160F776347877CE565EB /* Pods_Feed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29812B3A670C01A10A0CA6A /* Pods_Feed.framework */; };
+		9004153F2E8D928500C6B5A4 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004153E2E8D927D00C6B5A4 /* Extension+UIViewController.swift */; };
 		901BEF8127071EE300B822D3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF7F27071EE300B822D3 /* SignUpViewController.swift */; };
 		901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF8027071EE300B822D3 /* SignUpViewController.xib */; };
 		901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF832707442800B822D3 /* FirebaseAuthManager.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9004153E2E8D927D00C6B5A4 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		901BEF7F27071EE300B822D3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		901BEF8027071EE300B822D3 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		901BEF832707442800B822D3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		90D97998270D102F008CEB0C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9004153E2E8D927D00C6B5A4 /* Extension+UIViewController.swift */,
 				90D97999270D10D0008CEB0C /* Extension+Date.swift */,
 				90D9799B270D1328008CEB0C /* Extension+String.swift */,
 			);
@@ -385,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9004153F2E8D928500C6B5A4 /* Extension+UIViewController.swift in Sources */,
 				901BEF8127071EE300B822D3 /* SignUpViewController.swift in Sources */,
 				901BEF9A2707C68200B822D3 /* FeedViewController.swift in Sources */,
 				901BEF862707446400B822D3 /* UserSession.swift in Sources */,
