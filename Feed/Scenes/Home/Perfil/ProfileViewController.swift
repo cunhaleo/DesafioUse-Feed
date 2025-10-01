@@ -29,8 +29,8 @@ final class ProfileViewController: UIViewController {
         let viewController = SignInViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar
-        
     }
+    
     //MARK: - Methods
     
     func setupUI() {
@@ -38,7 +38,6 @@ final class ProfileViewController: UIViewController {
         labelName.text = name
         labelInitials.text = name?.getLettersInitiais()
         viewInitials.layer.cornerRadius = 60
-        
     }
 }
     

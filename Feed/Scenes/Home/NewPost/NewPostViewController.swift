@@ -14,10 +14,12 @@ final class NewPostViewController: UIViewController {
     private let db = Firestore.firestore()
     
     // MARK: Outlets
+    @IBOutlet weak var textViewNewPost: UITextView!
     @IBOutlet weak var labelUserName: UILabel!
     @IBOutlet weak var labelInitialsName: UILabel!
-    @IBOutlet weak var textFieldNewPost: UITextField!
     @IBOutlet weak var buttonPublish: UIButton!
+    
+    private let placeholderText = "O que você está pensando hoje?"
     
     // MARK: Overrides
     override func viewDidLoad() {
@@ -31,7 +33,7 @@ final class NewPostViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func handlerButtonPublish(_ sender: Any) {
-        let message = textFieldNewPost.text ?? ""
+        let message = textViewNewPost.text ?? ""
         guard let userId = Auth.auth().currentUser?.uid else { return }
         guard let name = UserSession.shared.name else { return }
         let date = Date()
@@ -57,21 +59,21 @@ final class NewPostViewController: UIViewController {
     func setupUI() {
         guard let name = UserSession.shared.name else { return }
         let initialLettersName = name.getLettersInitiais()
-        
         labelUserName.text = name
         labelInitialsName.text = initialLettersName
         buttonPublish.layer.cornerRadius = 8
-        textFieldNewPost.addTarget(self, action: #selector(changePostButtonUI), for: .editingChanged)
+        setupTextView()
+
     }
     
-    @objc func changePostButtonUI () {
-        let message = textFieldNewPost.text ?? ""
-        let isEnabled = message.count >= 10
-        
-        buttonPublish.isEnabled = isEnabled
-        buttonPublish.backgroundColor = isEnabled ? .systemYellow : .lightGray
-        buttonPublish.setTitleColor(.black, for: .normal)
-        buttonPublish.setTitleColor(.white, for: .disabled)
+    private func setupTextView() {
+        textViewNewPost.text = placeholderText
+        textViewNewPost.textColor = .lightGray
+        textViewNewPost.layer.masksToBounds = true
+        textViewNewPost.layer.cornerRadius = 8
+        textViewNewPost.layer.borderWidth = 1
+        textViewNewPost.layer.borderColor = UIColor.lightGray.cgColor
+        textViewNewPost.delegate = self
     }
     
     private func performPost(post: PostModel) async throws {
@@ -87,5 +89,32 @@ final class NewPostViewController: UIViewController {
         catch {
             throw error
         }
+    }
+}
+
+extension NewPostViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        changePostButtonUI()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        clearPlaceholder()
+    }
+    
+    private func clearPlaceholder() {
+        if textViewNewPost.textColor == .lightGray {
+            textViewNewPost.text = ""
+            textViewNewPost.textColor = .label
+        }
+    }
+    
+    private func changePostButtonUI() {
+        let message = textViewNewPost.text ?? ""
+        let isEnabled = message.count >= 10
+        
+        buttonPublish.isEnabled = isEnabled
+        buttonPublish.backgroundColor = isEnabled ? AssetsManager.colorPrimary : .lightGray
+        buttonPublish.setTitleColor(.black, for: .normal)
+        buttonPublish.setTitleColor(.white, for: .disabled)
     }
 }
