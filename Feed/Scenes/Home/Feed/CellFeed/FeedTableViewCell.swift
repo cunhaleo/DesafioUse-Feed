@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FeedTableViewCell: UITableViewCell {
+final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var labelPost: UILabel!
     @IBOutlet weak var labelIniciais: UILabel!
@@ -17,13 +17,16 @@ final class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var viewComments: UIView!
     @IBOutlet weak var viewLikes: UIView!
     @IBOutlet weak var viewCommentsSection: UIView!
+    @IBOutlet weak var textFieldNewComment: UITextField!
     
     var didTapComments: (() -> Void)?
+    var addNewComment: ((String) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCommentsTapGesture()
         setupLikesTapGesture()
+        setupNewCommentTextField()
     }
     
     func setup(name: String, date: String, post: String) {
@@ -32,6 +35,10 @@ final class FeedTableViewCell: UITableViewCell {
         labelPost.text = post
         labelIniciais.text = getLettersInitiais(name: name)
         viewCommentsSection.isHidden = true
+    }
+    
+    func fillComments(_ comments: [Comment]) {
+        
     }
     
     func getLettersInitiais(name: String) -> String {
@@ -69,5 +76,17 @@ final class FeedTableViewCell: UITableViewCell {
         contentView.setNeedsLayout()
         contentView.layoutIfNeeded()
         didTapComments?()
+    }
+    
+    private func setupNewCommentTextField() {
+        textFieldNewComment.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let newComment = textField.text, !newComment.isEmpty {
+            addNewComment?(newComment)
+        }
+        textField.resignFirstResponder()
+        return true
     }
 }

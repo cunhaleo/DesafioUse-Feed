@@ -103,7 +103,9 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setup(name: post.name, date: post.formattedDate, post: post.message)
             cell.didTapComments = { [weak self] in
                 Task {
-                    let comments = await self?.stractComments(from: post.postId ?? "")
+                    guard let postId = post.postId else { return }
+                    let comments = await self?.stractComments(from: postId)
+                    cell.fillComments(comments ?? [])
                     tableView.beginUpdates()
                     tableView.endUpdates()
                 }
