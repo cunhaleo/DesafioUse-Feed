@@ -54,7 +54,7 @@ final class SignUpViewController: UIViewController {
             isValid = false
         }
         
-        if !email.contains("@") {
+         if !email.contains("@"), !email.contains(".") {
             showAlert(title: "Alerta", message: "E-mail inválido!")
             isValid = false
         }
@@ -67,20 +67,11 @@ final class SignUpViewController: UIViewController {
         return isValid
     }
     
-    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: { action in
-            completion?()
-        })
-        alert.addAction(buttonOk)
-        present(alert, animated: true)
-    }
-    
     func setupUI(){
         title = "Registrar-se"
     }
     
-    private func openHome() {
+    @MainActor private func openHome() {
         let viewController = HomeTabViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar

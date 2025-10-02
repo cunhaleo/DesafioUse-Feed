@@ -74,8 +74,7 @@ final class FeedViewController: UIViewController {
 }
 
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         posts.count
     }
@@ -85,9 +84,12 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
             let post = posts[indexPath.row]
             cell.setup(name: post.name, date: post.formattedDate, post: post.message)
-            
+            cell.shouldUpdateHeight = {
+                tableView.beginUpdates()
+                tableView.endUpdates()
+            }
             return cell
-        }else{
+        } else {
             return UITableViewCell()
         }
     }

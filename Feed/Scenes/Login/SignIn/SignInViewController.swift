@@ -18,7 +18,6 @@ final class SignInViewController: UIViewController, UINavigationControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupNavigation()
     }
     
     // MARK: - Actions
@@ -55,29 +54,5 @@ final class SignInViewController: UIViewController, UINavigationControllerDelega
         let viewController = HomeTabViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar
-        
-    }
-    
-    func setupNavigation() {
-        
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-            appearance.backgroundColor = .systemYellow
-            UINavigationBar.appearance().standardAppearance = appearance;
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
-        
-        navigationController?.navigationBar.barTintColor = .systemYellow
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        navigationController?.navigationBar.tintColor = .black
-    }
-    
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let buttonOk = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(buttonOk)
-        present(alert, animated: true, completion: nil)
     }
 }
