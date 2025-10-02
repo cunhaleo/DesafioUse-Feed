@@ -37,7 +37,8 @@ final class NewPostViewController: UIViewController {
         let date = Date()
         let formattedDate = Date().getFormattedDate(format: .EEEEasHHmm).capitalizingFirstLetter()
         
-        let newPost = PostModel(message: message,
+        let newPost = PostModel(postId: "",
+                                message: message,
                                 userId: userId,
                                 name: name,
                                 date: date,
@@ -61,7 +62,7 @@ final class NewPostViewController: UIViewController {
         labelInitialsName.text = initialLettersName
         buttonPublish.layer.cornerRadius = 8
         setupTextView()
-
+        
     }
     
     private func setupTextView() {
@@ -75,8 +76,12 @@ final class NewPostViewController: UIViewController {
     }
     
     private func performPost(post: PostModel) async throws {
+        
+        let newPost = db.collection("Posts").document()
+        let postId = newPost.documentID
         do {
-            try await db.collection("Posts").addDocument(data: [
+            try await newPost.setData([
+                "postId" : postId,
                 "message" : post.message,
                 "userId" : post.userId,
                 "name" : post.name,

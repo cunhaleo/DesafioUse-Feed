@@ -71,6 +71,23 @@ final class FeedViewController: UIViewController {
             }
         }
     }
+    
+    private func stractComments(from postId: String) async -> [Comment] {
+        var comments: [Comment] = []
+        do {
+            let documents = try await db.collection("Posts").document(postId).collection("comments").order(by: "date", descending: false).getDocuments()
+            documents.documents.forEach { snapshot in
+                let comment = try? snapshot.data(as: Comment.self)
+                if let comment = comment {
+                    comments.append(comment)
+                }
+            }
+        } catch {
+            // TODO: ERROR HANDLING
+        }
+        print("===> COMENTS: \(comments)")
+        return comments
+    }
 }
 
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
@@ -84,9 +101,12 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
             let post = posts[indexPath.row]
             cell.setup(name: post.name, date: post.formattedDate, post: post.message)
-            cell.shouldUpdateHeight = {
-                tableView.beginUpdates()
-                tableView.endUpdates()
+            cell.didTapComments = { [weak self] in
+                Task {
+                    let comments = await self?.stractComments(from: post.postId ?? "")
+                    tableView.beginUpdates()
+                    tableView.endUpdates()
+                }
             }
             return cell
         } else {

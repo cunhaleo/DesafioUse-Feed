@@ -18,7 +18,7 @@ final class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var viewLikes: UIView!
     @IBOutlet weak var viewCommentsSection: UIView!
     
-    var shouldUpdateHeight: (() -> Void)?
+    var didTapComments: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,6 +68,6 @@ final class FeedTableViewCell: UITableViewCell {
         viewCommentsSection.isHidden.toggle()
         contentView.setNeedsLayout()
         contentView.layoutIfNeeded()
-        shouldUpdateHeight?()
+        didTapComments?()
     }
 }

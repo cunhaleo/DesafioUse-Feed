@@ -9,6 +9,7 @@ import Foundation
 
 struct PostModel: Codable {
     
+    var postId: String?
     let message: String
     let userId: String
     let name: String

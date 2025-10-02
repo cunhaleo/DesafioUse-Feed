@@ -22,6 +22,7 @@
 		901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */; };
 		901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */; };
 		901BEFA32707E04800B822D3 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEFA22707E04800B822D3 /* PostModel.swift */; };
+		90321E902E8ED6F500AA9E4D /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90321E8F2E8ED6F000AA9E4D /* Comments.swift */; };
 		9063FCE32E848B9000558C0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9063FCE22E848B9000558C0B /* GoogleService-Info.plist */; };
 		9063FCE52E85AE9900558C0B /* AssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE42E85AE8D00558C0B /* AssetsManager.swift */; };
 		9063FCE82E87082400558C0B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE72E87081E00558C0B /* UserModel.swift */; };
@@ -51,6 +52,7 @@
 		901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		901BEFA22707E04800B822D3 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		90321E8F2E8ED6F000AA9E4D /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		9063FCE22E848B9000558C0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9063FCE42E85AE8D00558C0B /* AssetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsManager.swift; sourceTree = "<group>"; };
 		9063FCE72E87081E00558C0B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		901BEFA12707E02A00B822D3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				90321E8F2E8ED6F000AA9E4D /* Comments.swift */,
 				901BEFA22707E04800B822D3 /* PostModel.swift */,
 			);
 			path = Model;
@@ -396,6 +399,7 @@
 				901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */,
 				F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */,
 				F43D03732707C6A9005A536B /* NewPostViewController.swift in Sources */,
+				90321E902E8ED6F500AA9E4D /* Comments.swift in Sources */,
 				901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */,
 				9063FCE52E85AE9900558C0B /* AssetsManager.swift in Sources */,
 				90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */,
