@@ -102,9 +102,8 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             return cell
-        } else {
-            return UITableViewCell()
         }
+       return UITableViewCell()
     }
     
     private func updateHeights() {

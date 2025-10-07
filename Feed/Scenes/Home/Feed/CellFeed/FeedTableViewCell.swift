@@ -36,6 +36,7 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
         labelData.text = date
         labelPost.text = post
         labelIniciais.text = getLettersInitiais(name: name)
+        hideComments()
     }
     
     func hideComments() {
@@ -58,9 +59,36 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
             
             
             comments.forEach { comment in
-                let label = UILabel()
-                label.text = "\(comment.userName): \(comment.message)"
-                self.stackViewMessages.addArrangedSubview(label)
+                let contentView = UIView()
+                contentView.translatesAutoresizingMaskIntoConstraints = false
+                
+                let labelName = UILabel()
+                labelName.translatesAutoresizingMaskIntoConstraints = false
+                labelName.text = "\(comment.userName) : "
+                labelName.font = .systemFont(ofSize: 15, weight: .regular)
+                
+                let labelMessage = UILabel()
+                labelMessage.translatesAutoresizingMaskIntoConstraints = false
+                labelMessage.text = comment.message
+                labelMessage.font = .systemFont(ofSize: 14, weight: .light)
+                
+                contentView.addSubview(labelName)
+                contentView.addSubview(labelMessage)
+                self.stackViewMessages.addArrangedSubview(contentView)
+                
+                NSLayoutConstraint.activate([
+                    labelName.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                    labelName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+                    
+                    labelMessage.leadingAnchor.constraint(equalTo: labelName.trailingAnchor, constant: 8),
+                    labelMessage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                    
+                    contentView.widthAnchor.constraint(equalTo: self.stackViewMessages.widthAnchor),
+                    contentView.heightAnchor.constraint(equalToConstant: 30),
+                    contentView.leadingAnchor.constraint(equalTo: self.stackViewMessages.leadingAnchor),
+                    contentView.trailingAnchor.constraint(equalTo: self.stackViewMessages.trailingAnchor)
+                ])
+                
             }
         }
         
