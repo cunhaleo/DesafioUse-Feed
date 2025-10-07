@@ -22,35 +22,42 @@ final class FeedViewModel {
         self.service = service
     }
     
-    func comments(for postId: String) async -> [Comment] {
-        if expandedComments[postId] != nil {
-            return expandedComments[postId] ?? []
-        }
-        else {
-            let comments = await service.fetchComments(from: postId)
-            expandedComments[postId] = comments
-            return comments
-            
+    func fetchComments(for postId: String, completion: @escaping (([Comment]) -> Void)) {
+        var comments: [Comment] = []
+        Task {
+            do {
+                shouldShowLoading?(true)
+                comments = try await service.fetchComments(from: postId)
+                expandedComments[postId] = comments
+                completion(comments)
+            }
+            catch {
+                onError?(error)
+            }
+            shouldShowLoading?(false)
         }
     }
     
     func loadFeed() {
         Task {
             shouldShowLoading?(true)
-            self.posts = await service.fetchPosts()
-            onDataUpdate?()
+            do {
+                self.posts = try await service.fetchPosts()
+                onDataUpdate?()
+            } catch {
+                onError?(error)
+            }
             shouldShowLoading?(false)
         }
     }
     
-    func toggleComments(for postId: String) {
+    func clearComments(for postId: String) {
         if expandedComments[postId] != nil {
             expandedComments[postId] = nil
-        } 
+        }
     }
     
-    
-    func comments(for postId: String) -> [Comment]? {
+    func expandedComments(for postId: String) -> [Comment]? {
         expandedComments[postId]
     }
     

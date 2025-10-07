@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" verticalHuggingPriority="247" verticalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="69i-AZ-dCm">
-                        <rect key="frame" x="0.0" y="4" width="381" height="620"/>
+                        <rect key="frame" x="0.0" y="4" width="381" height="570"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlU-bX-aSI">
                                 <rect key="frame" x="20" y="73.5" width="341" height="446.5"/>
@@ -131,9 +131,12 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GYh-nw-Iqg" userLabel="StackViewComments">
-                                <rect key="frame" x="0.0" y="570" width="381" height="50"/>
+                                <rect key="frame" x="0.0" y="570" width="381" height="0.0"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Evm-sm-J6h" userLabel="CommentView">
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qB5-x9-3vs">
+                                        <rect key="frame" x="0.0" y="0.0" width="381" height="0.0"/>
+                                    </stackView>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Evm-sm-J6h" userLabel="CommentView">
                                         <rect key="frame" x="0.0" y="0.0" width="381" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Digitar comentário" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wnv-bb-zSd">
@@ -152,8 +155,12 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="qB5-x9-3vs" firstAttribute="leading" secondItem="GYh-nw-Iqg" secondAttribute="leading" id="JOo-Dp-a00"/>
+                                    <constraint firstItem="Evm-sm-J6h" firstAttribute="top" secondItem="qB5-x9-3vs" secondAttribute="bottom" id="OWU-cx-PA9"/>
+                                    <constraint firstAttribute="trailing" secondItem="qB5-x9-3vs" secondAttribute="trailing" id="QdU-KE-GiG"/>
                                     <constraint firstItem="Evm-sm-J6h" firstAttribute="leading" secondItem="GYh-nw-Iqg" secondAttribute="leading" id="e8O-IH-h5f"/>
                                     <constraint firstAttribute="trailing" secondItem="Evm-sm-J6h" secondAttribute="trailing" id="eJz-RY-BP5"/>
+                                    <constraint firstItem="qB5-x9-3vs" firstAttribute="top" secondItem="GYh-nw-Iqg" secondAttribute="top" id="wQx-rr-Oeg"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -194,6 +201,7 @@
                 <outlet property="labelPost" destination="HlU-bX-aSI" id="uJZ-3w-NaK"/>
                 <outlet property="labelUser" destination="kVt-lZ-zzp" id="Oyx-OV-fpo"/>
                 <outlet property="stackViewComments" destination="GYh-nw-Iqg" id="a1u-lQ-FYo"/>
+                <outlet property="stackViewMessages" destination="qB5-x9-3vs" id="lv3-DM-8c2"/>
                 <outlet property="textFieldNewComment" destination="Wnv-bb-zSd" id="Oe2-Qs-dsZ"/>
                 <outlet property="viewComments" destination="Wgm-cM-pTb" id="JJQ-fm-st8"/>
                 <outlet property="viewCommentsSection" destination="Evm-sm-J6h" id="CTU-fp-yWl"/>
