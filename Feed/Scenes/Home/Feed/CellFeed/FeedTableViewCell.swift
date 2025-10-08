@@ -20,6 +20,7 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var textFieldNewComment: UITextField!
     @IBOutlet weak var stackViewMessages: UIStackView!
     
+    private var post: PostModel?
     
     var didTapComments: (() -> Void)?
     var addNewComment: ((String) -> Void)?
@@ -31,11 +32,12 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
         setupNewCommentTextField()
     }
     
-    func setup(name: String, date: String, post: String) {
-        labelUser.text = name
-        labelData.text = date
-        labelPost.text = post
-        labelIniciais.text = getLettersInitiais(name: name)
+    func setup(post: PostModel) {
+        self.post = post
+        labelUser.text = post.name
+        labelData.text = post.formattedDate
+        labelPost.text = post.message
+        labelIniciais.text = getLettersInitiais(name: post.name)
         hideComments()
     }
     
@@ -65,12 +67,13 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
                 let labelName = UILabel()
                 labelName.translatesAutoresizingMaskIntoConstraints = false
                 labelName.text = "\(comment.userName) : "
-                labelName.font = .systemFont(ofSize: 15, weight: .regular)
+                labelName.font = .systemFont(ofSize: 15, weight: .semibold)
                 
                 let labelMessage = UILabel()
                 labelMessage.translatesAutoresizingMaskIntoConstraints = false
                 labelMessage.text = comment.message
-                labelMessage.font = .systemFont(ofSize: 14, weight: .light)
+                labelMessage.font = .systemFont(ofSize: 14, weight: .regular)
+                labelMessage.numberOfLines = 0
                 
                 contentView.addSubview(labelName)
                 contentView.addSubview(labelMessage)
@@ -90,11 +93,6 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
                 ])
                 
             }
-        }
-        
-        DispatchQueue.main.async {
-            self.contentView.setNeedsLayout()
-            self.contentView.layoutIfNeeded()
         }
     }
     
@@ -140,6 +138,7 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
         if let newComment = textField.text, !newComment.isEmpty {
             addNewComment?(newComment)
         }
+        textField.text = ""
         textField.resignFirstResponder()
         return true
     }

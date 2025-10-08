@@ -22,7 +22,7 @@ class FirebaseAuthManager {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             let userId = result.user.uid
             let user = try await getUserDocument(userId: userId)
-            userSession.startSession(name: user.name, email: user.email)
+            userSession.startSession(name: user.name, email: user.email, userId: userId)
         } catch {
             throw error
         }
@@ -46,7 +46,7 @@ class FirebaseAuthManager {
                 "name": name,
                 "email": email
             ])
-            userSession.startSession(name: name, email: email)
+            userSession.startSession(name: name, email: email, userId: userId)
         } catch {
             throw error
         }

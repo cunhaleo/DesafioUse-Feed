@@ -8,7 +8,14 @@
 import FirebaseFirestore
 import Foundation
 
-final class FeedService {
+protocol FeedServiceProtocol {
+    func fetchPosts() async throws -> [PostModel]
+    func fetchComments(from postId: String) async throws -> [Comment]
+    func addComment(_ comment: Comment, to postId: String) async throws
+}
+
+final class FeedService: FeedServiceProtocol {
+
     private let db = Firestore.firestore()
     
     func fetchPosts() async throws -> [PostModel] {
@@ -29,14 +36,36 @@ final class FeedService {
     func fetchComments(from postId: String) async throws -> [Comment] {
         var comments: [Comment] = []
 
-            let documents = try await db.collection("Posts").document(postId).collection("comments").order(by: "date", descending: false).getDocuments()
+            let documents = try await db.collection("Posts").document(postId).collection("comments").getDocuments()
+//        print("==> COMENT DOCUMENT: \(documents.documents)")
             documents.documents.forEach { snapshot in
                 let comment = try? snapshot.data(as: Comment.self)
+                print("COMMENT: \(comment?.message ?? "NIL")")
                 if let comment = comment {
                     comments.append(comment)
                 }
             }
 
         return comments
+    }
+    
+    func addComment(_ comment: Comment, to postId: String) async throws {
+        print("===> COMMENT: \(comment), POST: \(postId)")
+        
+        let newCommentRef = db.collection("Posts").document(postId).collection("comments").document()
+        let commentId = newCommentRef.documentID
+        do {
+            try await newCommentRef.setData([
+                "commentId" : commentId,
+                "message" : comment.message,
+                "userId" : comment.userId,
+                "userName" : comment.userName,
+                "formattedDate" : comment.formattedDate,
+                "date" : comment.date
+            ])
+        }
+        catch {
+            throw error
+        }
     }
 }

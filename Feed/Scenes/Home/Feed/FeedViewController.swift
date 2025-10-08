@@ -10,10 +10,19 @@ import FirebaseFirestore
 
 final class FeedViewController: UIViewController {
     
-    private let viewModel = FeedViewModel()
+    private let viewModel: FeedViewModeling
     let refreshControl = UIRefreshControl()
     
     @IBOutlet weak var tableView: UITableView!
+    
+    init(viewModel: FeedViewModeling = FeedViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +34,6 @@ final class FeedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.title = "Feed"
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
     }
     
     private func bindEvents() {
@@ -77,18 +82,18 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
             let post = viewModel.posts[indexPath.row]
-            let comments = viewModel.expandedComments(for: post.postId ?? "") ?? []
+            guard let postId = post.postId else { return UITableViewCell() }
+            let comments = viewModel.expandedComments(for: postId) ?? []
             
-            cell.setup(name: post.name, date: post.formattedDate, post: post.message)
+            cell.setup(post: post)
             updateHeights()
             
-            if viewModel.isExpanded(postId: post.postId ?? "") {
+            if viewModel.isExpanded(postId: postId) {
                 cell.fillComments(comments)
                 updateHeights()
             }
             
             cell.didTapComments = { [weak self] in
-                guard let postId = post.postId else { return }
                 if self?.viewModel.isExpanded(postId: postId) == true {
                     self?.viewModel.clearComments(for: postId)
                     cell.hideComments()
@@ -98,18 +103,27 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 self?.viewModel.fetchComments(for: postId) { [weak self] comments in
                     cell.fillComments(comments)
-                    self?.updateHeights()
+                    self?.updateHeights(at: indexPath)
                 }
+            }
+            
+            cell.addNewComment = { [weak self] message in
+                self?.viewModel.addComment(message, to: postId)
             }
             return cell
         }
-       return UITableViewCell()
+        return UITableViewCell()
     }
     
-    private func updateHeights() {
+    private func updateHeights(at indexPath: IndexPath? = nil) {
         DispatchQueue.main.async {
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
+            UIView.animate(withDuration: 0.5) {
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+                guard let indexPath else { return }
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+            }
         }
     }
 }
+

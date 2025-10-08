@@ -8,6 +8,7 @@
 import Foundation
 
 struct Comment: Codable {
+    var commentId: String?
     var message: String
     var date: Date
     var formattedDate: String
