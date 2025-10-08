@@ -36,11 +36,9 @@ final class FeedService: FeedServiceProtocol {
     func fetchComments(from postId: String) async throws -> [Comment] {
         var comments: [Comment] = []
 
-            let documents = try await db.collection("Posts").document(postId).collection("comments").getDocuments()
-//        print("==> COMENT DOCUMENT: \(documents.documents)")
+        let documents = try await db.collection("Posts").document(postId).collection("comments").order(by: "date", descending: false).getDocuments()
             documents.documents.forEach { snapshot in
                 let comment = try? snapshot.data(as: Comment.self)
-                print("COMMENT: \(comment?.message ?? "NIL")")
                 if let comment = comment {
                     comments.append(comment)
                 }
@@ -50,8 +48,6 @@ final class FeedService: FeedServiceProtocol {
     }
     
     func addComment(_ comment: Comment, to postId: String) async throws {
-        print("===> COMMENT: \(comment), POST: \(postId)")
-        
         let newCommentRef = db.collection("Posts").document(postId).collection("comments").document()
         let commentId = newCommentRef.documentID
         do {

@@ -28,7 +28,7 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         setupRefreshControl()
         setupTableView()
-        viewModel.loadFeed()
+        viewModel.loadFeed(completion: nil)
         bindEvents()
     }
     
@@ -42,17 +42,6 @@ final class FeedViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         }
-        
-        viewModel.shouldShowLoading = { [weak self] shouldShow in
-            DispatchQueue.main.async {
-                if shouldShow {
-                    self?.refreshControl.beginRefreshing()
-                }
-                else {
-                    self?.refreshControl.endRefreshing()
-                }
-            }
-        }
     }
     
     func setupRefreshControl() {
@@ -61,7 +50,9 @@ final class FeedViewController: UIViewController {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        viewModel.loadFeed()
+        viewModel.loadFeed() { [weak self] in
+            self?.refreshControl.endRefreshing()
+        }
     }
     
     func setupTableView() {
@@ -82,25 +73,25 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
             let post = viewModel.posts[indexPath.row]
-            guard let postId = post.postId else { return UITableViewCell() }
-            let comments = viewModel.expandedComments(for: postId) ?? []
+            let comments = viewModel.expandedComments(for: post.postId ?? "") ?? []
             
             cell.setup(post: post)
             updateHeights()
             
-            if viewModel.isExpanded(postId: postId) {
+            if viewModel.isExpanded(postId: post.postId ?? "") {
                 cell.fillComments(comments)
                 updateHeights()
             }
             
             cell.didTapComments = { [weak self] in
+                guard let postId = post.postId else { return }
                 if self?.viewModel.isExpanded(postId: postId) == true {
                     self?.viewModel.clearComments(for: postId)
                     cell.hideComments()
                     self?.updateHeights()
                     return
                 }
-                
+            
                 self?.viewModel.fetchComments(for: postId) { [weak self] comments in
                     cell.fillComments(comments)
                     self?.updateHeights(at: indexPath)
@@ -108,6 +99,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.addNewComment = { [weak self] message in
+                guard let postId = post.postId else { return }
                 self?.viewModel.addComment(message, to: postId)
             }
             return cell
@@ -121,7 +113,7 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
                 guard let indexPath else { return }
-                self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
             }
         }
     }

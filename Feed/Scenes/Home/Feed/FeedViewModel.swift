@@ -11,11 +11,10 @@ import Foundation
 protocol FeedViewModeling: AnyObject {
     var onDataUpdate: (() -> Void)? { get set }
     var onError: ((Error) -> Void)? { get set }
-    var shouldShowLoading: ((Bool) -> Void)? { get set }
     var posts: [PostModel] { get }
     
     func fetchComments(for postId: String, completion: @escaping (([Comment]) -> Void))
-    func loadFeed()
+    func loadFeed(completion: (() -> Void)?)
     func clearComments(for postId: String)
     func expandedComments(for postId: String) -> [Comment]?
     func isExpanded(postId: String) -> Bool
@@ -30,8 +29,6 @@ final class FeedViewModel: FeedViewModeling {
     
     var onDataUpdate: (() -> Void)?
     var onError: ((Error) -> Void)?
-    var shouldShowLoading: ((Bool) -> Void)?
-    
     
     init(service: FeedServiceProtocol = FeedService()) {
         self.service = service
@@ -41,28 +38,25 @@ final class FeedViewModel: FeedViewModeling {
         var comments: [Comment] = []
         Task {
             do {
-                shouldShowLoading?(true)
                 comments = try await service.fetchComments(from: postId)
                 expandedComments[postId] = comments
-                completion(comments)
             }
             catch {
                 onError?(error)
             }
-            shouldShowLoading?(false)
+            completion(comments)
         }
     }
     
-    func loadFeed() {
+    func loadFeed(completion: (() -> Void)?) {
         Task {
-            shouldShowLoading?(true)
             do {
                 self.posts = try await service.fetchPosts()
                 onDataUpdate?()
             } catch {
                 onError?(error)
             }
-            shouldShowLoading?(false)
+            completion?()
         }
     }
     
@@ -87,7 +81,6 @@ final class FeedViewModel: FeedViewModeling {
                               date: Date(),
                               formattedDate: Date().getFormattedDate(format: .EEEEasHHmm),
                               userId: userId,
-                              
                               userName: userName)
         Task {
             do {
