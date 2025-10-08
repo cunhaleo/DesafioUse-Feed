@@ -11,6 +11,7 @@
 		9004153F2E8D928500C6B5A4 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004153E2E8D927D00C6B5A4 /* Extension+UIViewController.swift */; };
 		900E22952E9573B000A57AEA /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E22942E9573AB00A57AEA /* FeedViewModel.swift */; };
 		900E22992E957CA500A57AEA /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E22982E957CA100A57AEA /* FeedService.swift */; };
+		900E229E2E97063600A57AEA /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E229D2E97063000A57AEA /* ProgressView.swift */; };
 		901BEF8127071EE300B822D3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF7F27071EE300B822D3 /* SignUpViewController.swift */; };
 		901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF8027071EE300B822D3 /* SignUpViewController.xib */; };
 		901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF832707442800B822D3 /* FirebaseAuthManager.swift */; };
@@ -43,6 +44,7 @@
 		9004153E2E8D927D00C6B5A4 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		900E22942E9573AB00A57AEA /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		900E22982E957CA100A57AEA /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		900E229D2E97063000A57AEA /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		901BEF7F27071EE300B822D3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		901BEF8027071EE300B822D3 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		901BEF832707442800B822D3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
@@ -103,6 +105,14 @@
 				9475A1F7319B8064837D8BDC /* Pods-Feed.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		900E229C2E97061E00A57AEA /* Commom Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				900E229D2E97063000A57AEA /* ProgressView.swift */,
+			);
+			path = "Commom Scenes";
 			sourceTree = "<group>";
 		};
 		901BEF7E27071CEF00B822D3 /* SignUp */ = {
@@ -201,6 +211,7 @@
 		90D97997270D0FE2008CEB0C /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				900E229C2E97061E00A57AEA /* Commom Scenes */,
 				90D97998270D102F008CEB0C /* Extensions */,
 			);
 			path = Commons;
@@ -414,6 +425,7 @@
 				901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */,
 				900E22992E957CA500A57AEA /* FeedService.swift in Sources */,
 				901BEFA32707E04800B822D3 /* PostModel.swift in Sources */,
+				900E229E2E97063600A57AEA /* ProgressView.swift in Sources */,
 				9063FCE82E87082400558C0B /* UserModel.swift in Sources */,
 				90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */,
 			);

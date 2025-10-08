@@ -42,6 +42,10 @@ final class FeedViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         }
+        
+        viewModel.shouldShowProgress = { [weak self] showProgress in
+            showProgress ? self?.showProgressScreen() : self?.dismissProgressScreen()
+        }
     }
     
     func setupRefreshControl() {

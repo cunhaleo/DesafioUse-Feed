@@ -12,6 +12,7 @@ protocol FeedViewModeling: AnyObject {
     var onDataUpdate: (() -> Void)? { get set }
     var onError: ((Error) -> Void)? { get set }
     var posts: [PostModel] { get }
+    var shouldShowProgress: ((Bool) -> Void)? { get set }
     
     func fetchComments(for postId: String, completion: @escaping (([Comment]) -> Void))
     func loadFeed(completion: (() -> Void)?)
@@ -23,12 +24,14 @@ protocol FeedViewModeling: AnyObject {
 }
 
 final class FeedViewModel: FeedViewModeling {
+    
     private let service: FeedServiceProtocol
     private(set) var posts: [PostModel] = []
     private(set) var expandedComments: [String: [Comment]] = [:]
     
     var onDataUpdate: (() -> Void)?
     var onError: ((Error) -> Void)?
+    var shouldShowProgress: ((Bool) -> Void)?
     
     init(service: FeedServiceProtocol = FeedService()) {
         self.service = service
@@ -37,6 +40,7 @@ final class FeedViewModel: FeedViewModeling {
     func fetchComments(for postId: String, completion: @escaping (([Comment]) -> Void)) {
         var comments: [Comment] = []
         Task {
+            shouldShowProgress?(true)
             do {
                 comments = try await service.fetchComments(from: postId)
                 expandedComments[postId] = comments
@@ -45,6 +49,7 @@ final class FeedViewModel: FeedViewModeling {
                 onError?(error)
             }
             completion(comments)
+            shouldShowProgress?(false)
         }
     }
     
@@ -83,11 +88,13 @@ final class FeedViewModel: FeedViewModeling {
                               userId: userId,
                               userName: userName)
         Task {
+            shouldShowProgress?(true)
             do {
                 try await service.addComment(comment, to: postId)
             } catch {
                 onError?(error)
             }
+            shouldShowProgress?(false)
         }
     }
 }
