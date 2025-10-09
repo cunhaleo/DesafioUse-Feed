@@ -12,6 +12,7 @@ final class FeedViewController: UIViewController {
     
     private let viewModel: FeedViewModeling
     let refreshControl = UIRefreshControl()
+    private var heightCache: [IndexPath: CGFloat] = [:]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -55,7 +56,9 @@ final class FeedViewController: UIViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         viewModel.loadFeed() { [weak self] in
-            self?.refreshControl.endRefreshing()
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
+            }
         }
     }
     
@@ -63,6 +66,10 @@ final class FeedViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 400
+        tableView.keyboardDismissMode = .onDrag
+        tableView.separatorStyle = .none
     }
     
 }
@@ -80,25 +87,25 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
             let comments = viewModel.expandedComments(for: post.postId ?? "") ?? []
             
             cell.setup(post: post)
-            updateHeights()
             
             if viewModel.isExpanded(postId: post.postId ?? "") {
                 cell.fillComments(comments)
-                updateHeights()
             }
+            
+            performLayoutUpdate()
             
             cell.didTapComments = { [weak self] in
                 guard let postId = post.postId else { return }
                 if self?.viewModel.isExpanded(postId: postId) == true {
                     self?.viewModel.clearComments(for: postId)
                     cell.hideComments()
-                    self?.updateHeights()
+                    self?.animateExpansion()
                     return
                 }
-            
+                
                 self?.viewModel.fetchComments(for: postId) { [weak self] comments in
                     cell.fillComments(comments)
-                    self?.updateHeights(at: indexPath)
+                    self?.animateExpansion(at: indexPath)
                 }
             }
             
@@ -111,14 +118,35 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-    private func updateHeights(at indexPath: IndexPath? = nil) {
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        print(heightCache)
+        return heightCache[indexPath] ?? tableView.estimatedRowHeight
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   didEndDisplaying cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
+        heightCache[indexPath] = cell.frame.height
+    }
+    
+    private func performLayoutUpdate() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5) {
+            UIView.performWithoutAnimation {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
-                guard let indexPath else { return }
-                self.tableView.scrollToRow(at: indexPath, at: .none, animated: false)
             }
+        }
+    }
+    
+    private func animateExpansion(at indexPath: IndexPath? = nil) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.25) {
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+            }
+            guard let indexPath else { return }
+            self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
         }
     }
 }

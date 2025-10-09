@@ -55,6 +55,7 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
         DispatchQueue.main.async {
             self.viewCommentsSection.isHidden = false
             self.stackViewMessages.isHidden = false
+            self.stackViewMessages.distribution = .fill
             self.stackViewMessages.subviews.forEach { subview in
                 subview.removeFromSuperview()
             }
@@ -74,20 +75,25 @@ final class FeedTableViewCell: UITableViewCell, UITextFieldDelegate {
                 labelMessage.text = comment.message
                 labelMessage.font = .systemFont(ofSize: 14, weight: .regular)
                 labelMessage.numberOfLines = 0
+                labelMessage.setContentHuggingPriority(UILayoutPriority(751), for: .vertical)
                 
                 contentView.addSubview(labelName)
                 contentView.addSubview(labelMessage)
                 self.stackViewMessages.addArrangedSubview(contentView)
                 
                 NSLayoutConstraint.activate([
-                    labelName.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                    labelName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
                     labelName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
                     
                     labelMessage.leadingAnchor.constraint(equalTo: labelName.trailingAnchor, constant: 8),
+                    labelMessage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
                     labelMessage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                    labelMessage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+                    
                     
                     contentView.widthAnchor.constraint(equalTo: self.stackViewMessages.widthAnchor),
-                    contentView.heightAnchor.constraint(equalToConstant: 30),
+                    contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30) ,
+                    
                     contentView.leadingAnchor.constraint(equalTo: self.stackViewMessages.leadingAnchor),
                     contentView.trailingAnchor.constraint(equalTo: self.stackViewMessages.trailingAnchor)
                 ])

@@ -44,6 +44,5 @@ final class HomeTabViewController: UITabBarController {
     func setupTabBarUI() {
         self.tabBar.unselectedItemTintColor = AssetsManager.colorSecondary
         self.tabBar.tintColor = AssetsManager.colorPrimary
-        
     }
 }
