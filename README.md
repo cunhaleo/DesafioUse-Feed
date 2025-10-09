@@ -1,4 +1,15 @@
-# DesafioUse-Feed
+# **EDIT: REFATORAÇÃO EM PROGRESSO 10/2025 🔧**
+
+A ideia é recriar o backend no Firebase,
+
+Repaginar a UI e,
+
+Criar mais funcionalidades como comentários e likes nas postagens, imagens de perfil e etc
+
+Aplicar SOLID ao projeto legado
+
+
+# DesafioUse-Feed (21/09/2021)
 Terceiro desafio do bootcamp UseAcademy! :blue_heart: Criando um app de Feed!
 
 :warning: TO DO: Organizar regras de negócios em ViewModel files.
