@@ -1,20 +1,11 @@
-//
-//  FeedViewController.swift
-//  Feed
-//
-//  Created by Leonardo Cunha on 01/10/21.
-//
-
 import UIKit
-import FirebaseFirestore
 
 final class FeedViewController: UIViewController {
-    
+
+    private let tableView = UITableView()
     private let viewModel: FeedViewModeling
-    let refreshControl = UIRefreshControl()
-    private var heightCache: [IndexPath: CGFloat] = [:]
-    
-    @IBOutlet weak var tableView: UITableView!
+    private let activity = UIActivityIndicatorView(style: .large)
+    private let refreshControl = UIRefreshControl()
     
     init(viewModel: FeedViewModeling = FeedViewModel()) {
         self.viewModel = viewModel
@@ -24,130 +15,175 @@ final class FeedViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Feed"
+        view.backgroundColor = .systemBackground
         setupRefreshControl()
         setupTableView()
-        viewModel.loadFeed(completion: nil)
-        bindEvents()
+        setupActivity()
+        bindViewModel()
+        loadFeed()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.title = "Feed"
+    private func setupRefreshControl() {
+        refreshControl.translatesAutoresizingMaskIntoConstraints = false
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
-    
-    private func bindEvents() {
-        viewModel.onDataUpdate = { [weak self] in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
-        
-        viewModel.shouldShowProgress = { [weak self] showProgress in
-            showProgress ? self?.showProgressScreen() : self?.dismissProgressScreen()
-        }
-    }
-    
-    func setupRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        tableView.addSubview(refreshControl)
-    }
-    
-    @objc func refresh(_ sender: AnyObject) {
+
+    @objc private func refresh() {
         viewModel.loadFeed() { [weak self] in
             DispatchQueue.main.async {
                 self?.refreshControl.endRefreshing()
             }
         }
     }
-    
-    func setupTableView() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 400
-        tableView.keyboardDismissMode = .onDrag
-        tableView.separatorStyle = .none
+    private func setupActivity() {
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activity)
+        NSLayoutConstraint.activate([
+            activity.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activity.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
-    
+
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
+        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: FeedTableViewCell.identifier)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 180
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+
+    private func bindViewModel() {
+        // reload data when vm tells
+        viewModel.onDataUpdate = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+
+        viewModel.onError = { [weak self] error in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Erro", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(alert, animated: true)
+            }
+        }
+
+        viewModel.shouldShowProgress = { [weak self] show in
+            DispatchQueue.main.async {
+                if show {
+                    self?.activity.startAnimating()
+                } else {
+                    self?.activity.stopAnimating()
+                }
+            }
+        }
+    }
+
+    private func loadFeed() {
+        // usa a API que existe no ViewModel
+        viewModel.loadFeed(completion: nil)
+    }
 }
 
-extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
-    
+// MARK: - UITableViewDataSource & Delegate
+extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.posts.count
+         viewModel.posts.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedTableViewCell.identifier, for: indexPath) as? FeedTableViewCell else {
+            return UITableViewCell()
+        }
+
+        let post = viewModel.posts[indexPath.row]
+        // safe unwrap postId
+        if let postId = post.postId {
+            let expanded = viewModel.isExpanded(postId: postId)
+            let comments = viewModel.expandedComments(for: postId)
+            cell.configure(with: post, comments: comments, expanded: expanded, index: indexPath.row)
+        } else {
+            // post sem id (fallback)
+            cell.configure(with: post, comments: nil, expanded: false, index: indexPath.row)
+        }
+
+        cell.delegate = self
+        return cell
+    }
+}
+
+// MARK: - FeedTableViewCellDelegate
+extension FeedViewController: FeedTableViewCellDelegate {
+
+    func feedCellDidTapLike(at index: Int) {
+        // O ViewModel não tem método de like. Aqui podemos apenas animar/mostrar feedback.
+        guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? FeedTableViewCell else { return }
+        // pequeno bounce
+        UIView.animate(withDuration: 0.12,
+                       animations: { cell.transform = CGAffineTransform(scaleX: 0.97, y: 0.97) },
+                       completion: { _ in
+                           UIView.animate(withDuration: 0.12) { cell.transform = .identity }
+                       })
+    }
+
+    func feedCellDidTapComments(at index: Int) {
+        let post = viewModel.posts[index]
+        guard let postId = post.postId else { return }
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as? FeedTableViewCell {
-            let post = viewModel.posts[indexPath.row]
-            let comments = viewModel.expandedComments(for: post.postId ?? "") ?? []
-            
-            cell.setup(post: post)
-            
-            if viewModel.isExpanded(postId: post.postId ?? "") {
-                cell.fillComments(comments)
-            }
-            
-            performLayoutUpdate()
-            
-            cell.didTapComments = { [weak self] in
-                guard let postId = post.postId else { return }
-                if self?.viewModel.isExpanded(postId: postId) == true {
-                    self?.viewModel.clearComments(for: postId)
-                    cell.hideComments()
-                    self?.animateExpansion()
-                    return
-                }
-                
-                self?.viewModel.fetchComments(for: postId) { [weak self] comments in
-                    cell.fillComments(comments)
-                    self?.animateExpansion(at: indexPath)
-                }
-            }
-            
-            cell.addNewComment = { [weak self] message in
-                guard let postId = post.postId else { return }
-                self?.viewModel.addComment(message, to: postId)
-            }
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        print(heightCache)
-        return heightCache[indexPath] ?? tableView.estimatedRowHeight
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   didEndDisplaying cell: UITableViewCell,
-                   forRowAt indexPath: IndexPath) {
-        heightCache[indexPath] = cell.frame.height
-    }
-    
-    private func performLayoutUpdate() {
-        DispatchQueue.main.async {
-            UIView.performWithoutAnimation {
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
+        if viewModel.isExpanded(postId: postId) {
+            // já expandido -> colapsa
+            viewModel.clearComments(for: postId)
+            // animação de update
+            self.reloadRow(at: index)
+        } else {
+            // busca comentários (aplica expansão)
+            viewModel.fetchComments(for: postId) { [weak self] comments in
+                self?.reloadRow(at: index)
             }
         }
     }
     
-    private func animateExpansion(at indexPath: IndexPath? = nil) {
+    private func reloadRow(at index: Int) {
+        let ip = IndexPath(row: index, section: 0)
         DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [ip], with: .automatic)
             UIView.animate(withDuration: 0.25) {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
             }
-            guard let indexPath else { return }
-            self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        }
+    }
+
+    func feedCellDidAddComment(_ text: String, at index: Int) {
+        let post = viewModel.posts[index]
+        guard let postId = post.postId else { return }
+
+        // chama o método do ViewModel que existe
+        viewModel.addComment(text, to: postId)
+
+        // opcional: após adicionar, tentar recarregar os comentários imediatamente (o viewModel pode ou não sincronizar imediatamente).
+        // Eu faço um fetchComments para obter a lista atualizada — se o addComment ainda estiver em andamento, pode demorar.
+        viewModel.fetchComments(for: postId) { [weak self] _ in
+            DispatchQueue.main.async {
+                let ip = IndexPath(row: index, section: 0)
+                self?.tableView.reloadRows(at: [ip], with: .automatic)
+            }
         }
     }
 }
-

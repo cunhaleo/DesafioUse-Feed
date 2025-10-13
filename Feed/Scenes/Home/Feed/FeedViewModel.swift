@@ -37,6 +37,10 @@ final class FeedViewModel: FeedViewModeling {
         self.service = service
     }
     
+    func toggleComments(for index: Int) {
+        
+    }
+    
     func fetchComments(for postId: String, completion: @escaping (([Comment]) -> Void)) {
         var comments: [Comment] = []
         Task {
