@@ -21,9 +21,7 @@
 		901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF922707B31A00B822D3 /* HomeTabViewController.swift */; };
 		901BEF952707B31A00B822D3 /* HomeTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF932707B31A00B822D3 /* HomeTabViewController.xib */; };
 		901BEF9A2707C68200B822D3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF982707C68200B822D3 /* FeedViewController.swift */; };
-		901BEF9B2707C68200B822D3 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF992707C68200B822D3 /* FeedViewController.xib */; };
 		901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */; };
-		901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */; };
 		901BEFA32707E04800B822D3 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEFA22707E04800B822D3 /* PostModel.swift */; };
 		90321E902E8ED6F500AA9E4D /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90321E8F2E8ED6F000AA9E4D /* Comments.swift */; };
 		9063FCE32E848B9000558C0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9063FCE22E848B9000558C0B /* GoogleService-Info.plist */; };
@@ -54,9 +52,7 @@
 		901BEF922707B31A00B822D3 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		901BEF932707B31A00B822D3 /* HomeTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTabViewController.xib; sourceTree = "<group>"; };
 		901BEF982707C68200B822D3 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		901BEF992707C68200B822D3 /* FeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
 		901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
-		901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		901BEFA22707E04800B822D3 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		90321E8F2E8ED6F000AA9E4D /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		9063FCE22E848B9000558C0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -152,7 +148,6 @@
 				900E22982E957CA100A57AEA /* FeedService.swift */,
 				900E22942E9573AB00A57AEA /* FeedViewModel.swift */,
 				901BEF982707C68200B822D3 /* FeedViewController.swift */,
-				901BEF992707C68200B822D3 /* FeedViewController.xib */,
 				901BEF9C2707C79400B822D3 /* CellFeed */,
 			);
 			path = Feed;
@@ -162,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */,
-				901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */,
 			);
 			path = CellFeed;
 			sourceTree = "<group>";
@@ -342,11 +336,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */,
 				901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */,
 				F43D03742707C6A9005A536B /* NewPostViewController.xib in Resources */,
 				F40044612706969400B910F2 /* SignInViewController.xib in Resources */,
-				901BEF9B2707C68200B822D3 /* FeedViewController.xib in Resources */,
 				901BEF952707B31A00B822D3 /* HomeTabViewController.xib in Resources */,
 				F4539807270670F80088ACCD /* LaunchScreen.storyboard in Resources */,
 				9063FCE32E848B9000558C0B /* GoogleService-Info.plist in Resources */,
