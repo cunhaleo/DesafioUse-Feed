@@ -27,14 +27,25 @@ final class UserSession {
             UserDefaults.standard.setValue(newValue, forKey: "keyEmail")
         }
     }
+        
+        private(set) var userId: String? {
+            get{
+                UserDefaults.standard.string(forKey: "keyId")
+            }
+            set{
+                UserDefaults.standard.setValue(newValue, forKey: "keyId")
+            }
+        }
     
     func finishSession() {
         name = nil
         email = nil
+        userId = nil
     }
     
-    func startSession(name: String, email: String) {
+    func startSession(name: String, email: String, userId: String) {
         self.name = name
         self.email = email
+        self.userId = userId
     }
 }

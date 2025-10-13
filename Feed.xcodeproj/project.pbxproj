@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		470D160F776347877CE565EB /* Pods_Feed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29812B3A670C01A10A0CA6A /* Pods_Feed.framework */; };
 		9004153F2E8D928500C6B5A4 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004153E2E8D927D00C6B5A4 /* Extension+UIViewController.swift */; };
+		900E22952E9573B000A57AEA /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E22942E9573AB00A57AEA /* FeedViewModel.swift */; };
+		900E22992E957CA500A57AEA /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E22982E957CA100A57AEA /* FeedService.swift */; };
+		900E229E2E97063600A57AEA /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E229D2E97063000A57AEA /* ProgressView.swift */; };
 		901BEF8127071EE300B822D3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF7F27071EE300B822D3 /* SignUpViewController.swift */; };
 		901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF8027071EE300B822D3 /* SignUpViewController.xib */; };
 		901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF832707442800B822D3 /* FirebaseAuthManager.swift */; };
@@ -18,10 +21,9 @@
 		901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF922707B31A00B822D3 /* HomeTabViewController.swift */; };
 		901BEF952707B31A00B822D3 /* HomeTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF932707B31A00B822D3 /* HomeTabViewController.xib */; };
 		901BEF9A2707C68200B822D3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF982707C68200B822D3 /* FeedViewController.swift */; };
-		901BEF9B2707C68200B822D3 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF992707C68200B822D3 /* FeedViewController.xib */; };
 		901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */; };
-		901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */; };
 		901BEFA32707E04800B822D3 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901BEFA22707E04800B822D3 /* PostModel.swift */; };
+		90321E902E8ED6F500AA9E4D /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90321E8F2E8ED6F000AA9E4D /* Comments.swift */; };
 		9063FCE32E848B9000558C0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9063FCE22E848B9000558C0B /* GoogleService-Info.plist */; };
 		9063FCE52E85AE9900558C0B /* AssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE42E85AE8D00558C0B /* AssetsManager.swift */; };
 		9063FCE82E87082400558C0B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE72E87081E00558C0B /* UserModel.swift */; };
@@ -38,6 +40,9 @@
 
 /* Begin PBXFileReference section */
 		9004153E2E8D927D00C6B5A4 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		900E22942E9573AB00A57AEA /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		900E22982E957CA100A57AEA /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		900E229D2E97063000A57AEA /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		901BEF7F27071EE300B822D3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		901BEF8027071EE300B822D3 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		901BEF832707442800B822D3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
@@ -47,10 +52,9 @@
 		901BEF922707B31A00B822D3 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		901BEF932707B31A00B822D3 /* HomeTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTabViewController.xib; sourceTree = "<group>"; };
 		901BEF982707C68200B822D3 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		901BEF992707C68200B822D3 /* FeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
 		901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
-		901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		901BEFA22707E04800B822D3 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		90321E8F2E8ED6F000AA9E4D /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		9063FCE22E848B9000558C0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9063FCE42E85AE8D00558C0B /* AssetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsManager.swift; sourceTree = "<group>"; };
 		9063FCE72E87081E00558C0B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -99,6 +103,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		900E229C2E97061E00A57AEA /* Commom Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				900E229D2E97063000A57AEA /* ProgressView.swift */,
+			);
+			path = "Commom Scenes";
+			sourceTree = "<group>";
+		};
 		901BEF7E27071CEF00B822D3 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +145,9 @@
 			isa = PBXGroup;
 			children = (
 				901BEFA12707E02A00B822D3 /* Model */,
+				900E22982E957CA100A57AEA /* FeedService.swift */,
+				900E22942E9573AB00A57AEA /* FeedViewModel.swift */,
 				901BEF982707C68200B822D3 /* FeedViewController.swift */,
-				901BEF992707C68200B822D3 /* FeedViewController.xib */,
 				901BEF9C2707C79400B822D3 /* CellFeed */,
 			);
 			path = Feed;
@@ -144,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				901BEF9D2707C7BF00B822D3 /* FeedTableViewCell.swift */,
-				901BEF9E2707C7BF00B822D3 /* FeedTableViewCell.xib */,
 			);
 			path = CellFeed;
 			sourceTree = "<group>";
@@ -152,6 +164,7 @@
 		901BEFA12707E02A00B822D3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				90321E8F2E8ED6F000AA9E4D /* Comments.swift */,
 				901BEFA22707E04800B822D3 /* PostModel.swift */,
 			);
 			path = Model;
@@ -192,6 +205,7 @@
 		90D97997270D0FE2008CEB0C /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				900E229C2E97061E00A57AEA /* Commom Scenes */,
 				90D97998270D102F008CEB0C /* Extensions */,
 			);
 			path = Commons;
@@ -322,11 +336,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				901BEFA02707C7BF00B822D3 /* FeedTableViewCell.xib in Resources */,
 				901BEF8227071EE300B822D3 /* SignUpViewController.xib in Resources */,
 				F43D03742707C6A9005A536B /* NewPostViewController.xib in Resources */,
 				F40044612706969400B910F2 /* SignInViewController.xib in Resources */,
-				901BEF9B2707C68200B822D3 /* FeedViewController.xib in Resources */,
 				901BEF952707B31A00B822D3 /* HomeTabViewController.xib in Resources */,
 				F4539807270670F80088ACCD /* LaunchScreen.storyboard in Resources */,
 				9063FCE32E848B9000558C0B /* GoogleService-Info.plist in Resources */,
@@ -396,12 +408,16 @@
 				901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */,
 				F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */,
 				F43D03732707C6A9005A536B /* NewPostViewController.swift in Sources */,
+				900E22952E9573B000A57AEA /* FeedViewModel.swift in Sources */,
+				90321E902E8ED6F500AA9E4D /* Comments.swift in Sources */,
 				901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */,
 				9063FCE52E85AE9900558C0B /* AssetsManager.swift in Sources */,
 				90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */,
 				901BEF8E270751DF00B822D3 /* ProfileViewController.swift in Sources */,
 				901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */,
+				900E22992E957CA500A57AEA /* FeedService.swift in Sources */,
 				901BEFA32707E04800B822D3 /* PostModel.swift in Sources */,
+				900E229E2E97063600A57AEA /* ProgressView.swift in Sources */,
 				9063FCE82E87082400558C0B /* UserModel.swift in Sources */,
 				90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */,
 			);
