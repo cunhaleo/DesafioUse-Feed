@@ -18,13 +18,20 @@ final class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Feed"
-        view.backgroundColor = .systemBackground
+        setupUI()
         setupRefreshControl()
         setupTableView()
         setupActivity()
         bindViewModel()
         loadFeed()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.title = "Feed"
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = AssetsManager.colorBackground
     }
     
     private func setupRefreshControl() {
