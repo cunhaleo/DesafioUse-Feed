@@ -13,3 +13,9 @@ struct SubjectModel: Codable {
     let description: String
     let followerCount: Int?
 }
+
+struct FolllowedSubject: Codable {
+    let subjectId: String
+    let subjectName: String
+    let followedAt: Date
+}

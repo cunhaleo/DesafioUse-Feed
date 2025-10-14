@@ -21,7 +21,7 @@ final class ProfileViewModel: ProfileViewModeling {
     let userSession: UserSessionProtocol
     let authManager: AuthManaging
     
-    var followedSubjects: [String]?
+    var followedSubjects: [FolllowedSubject]?
     
     init(userSession:UserSessionProtocol = UserSession.shared, authManager: AuthManaging = FirebaseAuthManager.shared, service: ProfileServicing = ProfileService()) {
         self.userSession = userSession
@@ -47,6 +47,6 @@ final class ProfileViewModel: ProfileViewModeling {
     }
     
     func getSubjectName(at indexPath: Int) -> String {
-        followedSubjects?[indexPath] ?? "Desconhecido"
+        followedSubjects?[indexPath].subjectName ?? "Desconhecido"
     }
 }

@@ -22,6 +22,26 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         return tableView
     }()
     
+    private lazy var labelFollowing: UILabel = {
+        let labelFollowing = UILabel()
+        labelFollowing.translatesAutoresizingMaskIntoConstraints = false
+        labelFollowing.text = "Assuntos que sigo"
+        labelFollowing.textAlignment = .left
+        labelFollowing.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        return labelFollowing
+    }()
+    
+    private lazy var buttonFollow: UIButton = {
+        let buttonFollow = UIButton()
+        buttonFollow.translatesAutoresizingMaskIntoConstraints = false
+        buttonFollow.setTitle("Adicionar", for: .normal)
+        buttonFollow.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        buttonFollow.setTitleColor(.systemBlue, for: .normal)
+        buttonFollow.layer.cornerRadius = 8
+        
+        return buttonFollow
+    }()
+    
     init(viewModel: ProfileViewModeling = ProfileViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -56,6 +76,7 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         viewUserSection.backgroundColor = AssetsManager.colorBackground
         viewInitials.layer.cornerRadius = 60
         setDefaultImage()
+        buildLayout()
     }
     
     func loadSubjects() {
@@ -99,28 +120,26 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = self
         tableView.layer.cornerRadius = 16
         tableView.register(ProfileSubjectCell.self, forCellReuseIdentifier: ProfileSubjectCell.identifier)
-        
-        let labelFollowing = followingLabel()
+    }
+    
+    func buildLayout() {
+        view.addSubview(buttonFollow)
         view.addSubview(labelFollowing)
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
+            
+            
             labelFollowing.topAnchor.constraint(equalTo: viewUserSection.bottomAnchor, constant: 20),
             labelFollowing.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            buttonFollow.leadingAnchor.constraint(equalTo: labelFollowing.trailingAnchor, constant: 30),
+            buttonFollow.centerYAnchor.constraint(equalTo: labelFollowing.centerYAnchor),
             
             tableView.topAnchor.constraint(equalTo: labelFollowing.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
         ])
-    }
-    
-    private func followingLabel() -> UILabel {
-        let labelFollowing = UILabel()
-        labelFollowing.translatesAutoresizingMaskIntoConstraints = false
-        labelFollowing.text = "Canais que sigo"
-        labelFollowing.textAlignment = .left
-        labelFollowing.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        return labelFollowing
     }
 }
 
