@@ -29,6 +29,8 @@
 		9063FCE82E87082400558C0B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE72E87081E00558C0B /* UserModel.swift */; };
 		909A58E32E9EAD59005B08A3 /* SubjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A58E22E9EAD59005B08A3 /* SubjectModel.swift */; };
 		909A58E62E9EC73D005B08A3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A58E52E9EC73D005B08A3 /* ProfileViewModel.swift */; };
+		909A58E82E9ECBF6005B08A3 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A58E72E9ECBF6005B08A3 /* ProfileService.swift */; };
+		909A58EB2E9ED67E005B08A3 /* ProfileSubjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A58EA2E9ED67E005B08A3 /* ProfileSubjectCell.swift */; };
 		90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D97999270D10D0008CEB0C /* Extension+Date.swift */; };
 		90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D9799B270D1328008CEB0C /* Extension+String.swift */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
@@ -62,6 +64,8 @@
 		9063FCE72E87081E00558C0B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		909A58E22E9EAD59005B08A3 /* SubjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectModel.swift; sourceTree = "<group>"; };
 		909A58E52E9EC73D005B08A3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		909A58E72E9ECBF6005B08A3 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		909A58EA2E9ED67E005B08A3 /* ProfileSubjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSubjectCell.swift; sourceTree = "<group>"; };
 		90D97999270D10D0008CEB0C /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		90D9799B270D1328008CEB0C /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		9475A1F7319B8064837D8BDC /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,10 +143,12 @@
 		901BEF962707B33C00B822D3 /* Perfil */ = {
 			isa = PBXGroup;
 			children = (
+				909A58E92E9ED660005B08A3 /* ProfileSubjectCell */,
 				909A58E42E9EB383005B08A3 /* Model */,
+				909A58E72E9ECBF6005B08A3 /* ProfileService.swift */,
+				909A58E52E9EC73D005B08A3 /* ProfileViewModel.swift */,
 				901BEF8C270751DF00B822D3 /* ProfileViewController.swift */,
 				901BEF8D270751DF00B822D3 /* ProfileViewController.xib */,
-				909A58E52E9EC73D005B08A3 /* ProfileViewModel.swift */,
 			);
 			path = Perfil;
 			sourceTree = "<group>";
@@ -214,6 +220,14 @@
 				909A58E22E9EAD59005B08A3 /* SubjectModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		909A58E92E9ED660005B08A3 /* ProfileSubjectCell */ = {
+			isa = PBXGroup;
+			children = (
+				909A58EA2E9ED67E005B08A3 /* ProfileSubjectCell.swift */,
+			);
+			path = ProfileSubjectCell;
 			sourceTree = "<group>";
 		};
 		90D97997270D0FE2008CEB0C /* Commons */ = {
@@ -422,9 +436,11 @@
 				901BEF842707442800B822D3 /* FirebaseAuthManager.swift in Sources */,
 				F45397FB270670F40088ACCD /* AppDelegate.swift in Sources */,
 				F43D03732707C6A9005A536B /* NewPostViewController.swift in Sources */,
+				909A58E82E9ECBF6005B08A3 /* ProfileService.swift in Sources */,
 				900E22952E9573B000A57AEA /* FeedViewModel.swift in Sources */,
 				90321E902E8ED6F500AA9E4D /* Comments.swift in Sources */,
 				901BEF942707B31A00B822D3 /* HomeTabViewController.swift in Sources */,
+				909A58EB2E9ED67E005B08A3 /* ProfileSubjectCell.swift in Sources */,
 				9063FCE52E85AE9900558C0B /* AssetsManager.swift in Sources */,
 				90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */,
 				901BEF8E270751DF00B822D3 /* ProfileViewController.swift in Sources */,

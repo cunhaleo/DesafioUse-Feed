@@ -14,9 +14,6 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var viewInitials: UIView!
     @IBOutlet weak var viewUserSection: UIView!
     
-    private let userSession: UserSessionProtocol
-    private let authManager: AuthManaging
-    
     private let viewModel: ProfileViewModeling
     
     private lazy var tableView: UITableView = {
@@ -25,9 +22,7 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         return tableView
     }()
     
-    init(userSession:UserSessionProtocol = UserSession.shared, authManager: AuthManaging = FirebaseAuthManager.shared, viewModel: ProfileViewModeling = ProfileViewModel()) {
-        self.userSession = userSession
-        self.authManager = authManager
+    init(viewModel: ProfileViewModeling = ProfileViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,6 +36,7 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         setupSubjectsTableView()
         setupUI()
         setupLogoutButton()
+        loadSubjects()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +55,16 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         viewUserSection.layer.cornerRadius = 16
         viewUserSection.backgroundColor = AssetsManager.colorBackground
         viewInitials.layer.cornerRadius = 60
+        setDefaultImage()
+    }
+    
+    func loadSubjects() {
+        Task {
+            try await viewModel.getSubjectList()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func setupLogoutButton() {
@@ -72,7 +78,7 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
     }
     
     @objc func logout() {
-        authManager.logout()
+        viewModel.logout()
         let viewController = SignInViewController()
         let navBar = UINavigationController(rootViewController: viewController)
         UIApplication.shared.windows.first?.rootViewController = navBar
@@ -83,15 +89,16 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
     }
     
     private func setDefaultImage() {
-        let name = userSession.name
+        let name = viewModel.getUsername()
         labelName.text = name
-        labelInitials.text = name?.getLettersInitiais()
+        labelInitials.text = name.getLettersInitiais()
     }
     
     private func setupSubjectsTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layer.cornerRadius = 16
+        tableView.register(ProfileSubjectCell.self, forCellReuseIdentifier: ProfileSubjectCell.identifier)
         
         let labelFollowing = followingLabel()
         view.addSubview(labelFollowing)
@@ -110,7 +117,7 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
     private func followingLabel() -> UILabel {
         let labelFollowing = UILabel()
         labelFollowing.translatesAutoresizingMaskIntoConstraints = false
-        labelFollowing.text = "Seguindo"
+        labelFollowing.text = "Canais que sigo"
         labelFollowing.textAlignment = .left
         labelFollowing.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         return labelFollowing
@@ -119,11 +126,14 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
 
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        viewModel.getNumberOfSubjects()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSubjectCell.identifier, for: indexPath) as? ProfileSubjectCell else { return UITableViewCell() }
+        
+        cell.setup(subject: viewModel.getSubjectName(at: indexPath.row))
+        return cell
     }
     
 }
