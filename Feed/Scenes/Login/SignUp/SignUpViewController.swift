@@ -34,7 +34,7 @@ final class SignUpViewController: UIViewController {
         if validateFields(name: name, email: email, password: password, confirmPassword: confirmPassword) {
             Task {
                 do {
-                    try await FirebaseAuthManager.createAccount(name: name, email: email, password: password)
+                    try await FirebaseAuthManager.shared.createAccount(name: name, email: email, password: password)
                     self.showAlert(title: "Sucesso", message: "Cadastro realizado.") { [weak self] in
                         self?.openHome()
                     }

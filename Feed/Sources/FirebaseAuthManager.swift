@@ -10,20 +10,23 @@ import FirebaseAuth
 import FirebaseFirestore
 
 protocol AuthManaging {
-    static func signIn(email: String, password: String) async throws
-    static func createAccount(name: String, email: String, password: String) async throws
-    static func logout()
+    func signIn(email: String, password: String) async throws
+    func createAccount(name: String, email: String, password: String) async throws
+    func logout()
 }
 
 class FirebaseAuthManager: AuthManaging {
     
     // MARK: Properties
-    private static let db = Firestore.firestore()
-    private static let userSession = UserSession.shared
+    private let db = Firestore.firestore()
+    private let userSession = UserSession.shared
     
+    static let shared = FirebaseAuthManager()
+    
+    private init() {}
     
     // MARK: Methods
-    static func signIn(email: String, password: String) async throws {
+    func signIn(email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             let userId = result.user.uid
@@ -34,7 +37,7 @@ class FirebaseAuthManager: AuthManaging {
         }
     }
     
-    static private func getUserDocument(userId: String) async throws -> UserModel {
+    private func getUserDocument(userId: String) async throws -> UserModel {
         do {
             let document = try await db.collection("users").document(userId).getDocument()
             let user = try document.data(as: UserModel.self)
@@ -44,7 +47,7 @@ class FirebaseAuthManager: AuthManaging {
         }
     }
     
-    static func createAccount(name: String, email: String, password: String) async throws {
+    func createAccount(name: String, email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             let userId = result.user.uid
@@ -58,7 +61,7 @@ class FirebaseAuthManager: AuthManaging {
         }
     }
     
-    static func logout() {
+    func logout() {
         try? Auth.auth().signOut()
         userSession.finishSession()
     }

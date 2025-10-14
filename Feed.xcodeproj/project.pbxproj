@@ -28,6 +28,7 @@
 		9063FCE52E85AE9900558C0B /* AssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE42E85AE8D00558C0B /* AssetsManager.swift */; };
 		9063FCE82E87082400558C0B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063FCE72E87081E00558C0B /* UserModel.swift */; };
 		909A58E32E9EAD59005B08A3 /* SubjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A58E22E9EAD59005B08A3 /* SubjectModel.swift */; };
+		909A58E62E9EC73D005B08A3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A58E52E9EC73D005B08A3 /* ProfileViewModel.swift */; };
 		90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D97999270D10D0008CEB0C /* Extension+Date.swift */; };
 		90D9799C270D1329008CEB0C /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D9799B270D1328008CEB0C /* Extension+String.swift */; };
 		F40044602706969400B910F2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F400445E2706969400B910F2 /* SignInViewController.swift */; };
@@ -60,6 +61,7 @@
 		9063FCE42E85AE8D00558C0B /* AssetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsManager.swift; sourceTree = "<group>"; };
 		9063FCE72E87081E00558C0B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		909A58E22E9EAD59005B08A3 /* SubjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectModel.swift; sourceTree = "<group>"; };
+		909A58E52E9EC73D005B08A3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		90D97999270D10D0008CEB0C /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		90D9799B270D1328008CEB0C /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		9475A1F7319B8064837D8BDC /* Pods-Feed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Feed.release.xcconfig"; path = "Target Support Files/Pods-Feed/Pods-Feed.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				909A58E42E9EB383005B08A3 /* Model */,
 				901BEF8C270751DF00B822D3 /* ProfileViewController.swift */,
 				901BEF8D270751DF00B822D3 /* ProfileViewController.xib */,
+				909A58E52E9EC73D005B08A3 /* ProfileViewModel.swift */,
 			);
 			path = Perfil;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				901BEF9F2707C7BF00B822D3 /* FeedTableViewCell.swift in Sources */,
 				900E22992E957CA500A57AEA /* FeedService.swift in Sources */,
 				901BEFA32707E04800B822D3 /* PostModel.swift in Sources */,
+				909A58E62E9EC73D005B08A3 /* ProfileViewModel.swift in Sources */,
 				900E229E2E97063600A57AEA /* ProgressView.swift in Sources */,
 				9063FCE82E87082400558C0B /* UserModel.swift in Sources */,
 				90D9799A270D10D0008CEB0C /* Extension+Date.swift in Sources */,

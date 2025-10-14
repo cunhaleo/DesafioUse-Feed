@@ -53,32 +53,15 @@
                                 <constraint firstAttribute="width" constant="120" id="qEX-dh-2Xg"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-ST-N22">
-                            <rect key="frame" x="177.5" y="97" width="80" height="30"/>
-                            <color key="backgroundColor" name="colorPrimary"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="80" id="2Bd-Uh-bRX"/>
-                                <constraint firstAttribute="height" constant="30" id="Ucq-L9-2Ta"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Logout">
-                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="buttonLogout:" destination="-1" eventType="touchUpInside" id="mp8-Yd-Whl"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="QAT-ST-N22" firstAttribute="centerX" secondItem="Hb9-14-0B7" secondAttribute="centerX" id="0oK-7G-GLm"/>
                         <constraint firstItem="K9X-6o-Vhd" firstAttribute="leading" secondItem="xU0-fp-RyK" secondAttribute="leading" constant="15" id="Pb4-r5-dG1"/>
                         <constraint firstItem="K9X-6o-Vhd" firstAttribute="top" secondItem="xU0-fp-RyK" secondAttribute="top" constant="15" id="Th4-F9-ajL"/>
                         <constraint firstAttribute="bottom" secondItem="K9X-6o-Vhd" secondAttribute="bottom" constant="15" id="ZPD-RG-ayX"/>
                         <constraint firstItem="Hb9-14-0B7" firstAttribute="leading" secondItem="K9X-6o-Vhd" secondAttribute="trailing" constant="15" id="cXK-Oz-zyt"/>
                         <constraint firstAttribute="trailing" secondItem="Hb9-14-0B7" secondAttribute="trailing" constant="15" id="hes-Ok-X0v"/>
                         <constraint firstItem="Hb9-14-0B7" firstAttribute="top" secondItem="K9X-6o-Vhd" secondAttribute="top" constant="15" id="uVC-bw-H2y"/>
-                        <constraint firstItem="QAT-ST-N22" firstAttribute="top" secondItem="Hb9-14-0B7" secondAttribute="bottom" constant="46" id="ysX-bD-A1h"/>
                     </constraints>
                 </view>
             </subviews>
@@ -96,9 +79,6 @@
     <resources>
         <namedColor name="colorDarkerBackground">
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="colorPrimary">
-            <color red="0.58039215686274515" green="0.32156862745098042" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

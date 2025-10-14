@@ -37,7 +37,7 @@ final class SignInViewController: UIViewController, UINavigationControllerDelega
         
         Task {
             do {
-                try await FirebaseAuthManager.signIn(email: email, password: password)
+                try await FirebaseAuthManager.shared.signIn(email: email, password: password)
                 self.openHome()
             }
             catch  {

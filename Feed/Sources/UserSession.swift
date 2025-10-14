@@ -19,6 +19,8 @@ final class UserSession: UserSessionProtocol {
     
     static let shared = UserSession()
     
+    private init() {}
+    
     private(set) var name: String? {
         get{
             UserDefaults.standard.string(forKey: "keyName")

@@ -17,15 +17,18 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
     private let userSession: UserSessionProtocol
     private let authManager: AuthManaging
     
+    private let viewModel: ProfileViewModeling
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    init(userSession:UserSessionProtocol = UserSession.shared, authManager: AuthManaging = FirebaseAuthManager()) {
+    init(userSession:UserSessionProtocol = UserSession.shared, authManager: AuthManaging = FirebaseAuthManager.shared, viewModel: ProfileViewModeling = ProfileViewModel()) {
         self.userSession = userSession
         self.authManager = authManager
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,34 +40,50 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         setupSubjectsTableView()
         setupUI()
+        setupLogoutButton()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.title = "Perfil"
+        setupLogoutButton()
     }
     
-    // MARK: - Actions
-    
-    @IBAction func buttonLogout(_ sender: Any) {
-        FirebaseAuthManager.logout()
-        let viewController = SignInViewController()
-        let navBar = UINavigationController(rootViewController: viewController)
-        UIApplication.shared.windows.first?.rootViewController = navBar
+    override func viewWillDisappear(_ animated: Bool) {
+        removeLogoutButton()
     }
     
     //MARK: - Methods
     
     func setupUI() {
         view.backgroundColor = AssetsManager.colorDarkerBackground
- 
         viewUserSection.layer.cornerRadius = 16
         viewUserSection.backgroundColor = AssetsManager.colorBackground
-
         viewInitials.layer.cornerRadius = 60
     }
     
+    private func setupLogoutButton() {
+        let logoutButton = UIBarButtonItem(
+            title: "Sair",
+            style: .plain,
+            target: self,
+            action: #selector(logout)
+        )
+        self.tabBarController?.navigationItem.rightBarButtonItem = logoutButton
+    }
+    
+    @objc func logout() {
+        authManager.logout()
+        let viewController = SignInViewController()
+        let navBar = UINavigationController(rootViewController: viewController)
+        UIApplication.shared.windows.first?.rootViewController = navBar
+    }
+    
+    private func removeLogoutButton() {
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+    }
+    
     private func setDefaultImage() {
-        let name = UserSession.shared.name
+        let name = userSession.name
         labelName.text = name
         labelInitials.text = name?.getLettersInitiais()
     }
@@ -74,13 +93,27 @@ final class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = self
         tableView.layer.cornerRadius = 16
         
+        let labelFollowing = followingLabel()
+        view.addSubview(labelFollowing)
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: viewUserSection.bottomAnchor, constant: 20),
+            labelFollowing.topAnchor.constraint(equalTo: viewUserSection.bottomAnchor, constant: 20),
+            labelFollowing.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            tableView.topAnchor.constraint(equalTo: labelFollowing.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
         ])
+    }
+    
+    private func followingLabel() -> UILabel {
+        let labelFollowing = UILabel()
+        labelFollowing.translatesAutoresizingMaskIntoConstraints = false
+        labelFollowing.text = "Seguindo"
+        labelFollowing.textAlignment = .left
+        labelFollowing.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        return labelFollowing
     }
 }
 
