@@ -10,5 +10,6 @@ import Foundation
 struct SubjectModel: Codable {
     let subjectId: String
     let subjectName: String
+    let description: String
     let followerCount: Int?
 }

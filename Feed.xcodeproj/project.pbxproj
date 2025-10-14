@@ -137,6 +137,7 @@
 		901BEF962707B33C00B822D3 /* Perfil */ = {
 			isa = PBXGroup;
 			children = (
+				909A58E42E9EB383005B08A3 /* Model */,
 				901BEF8C270751DF00B822D3 /* ProfileViewController.swift */,
 				901BEF8D270751DF00B822D3 /* ProfileViewController.xib */,
 			);
@@ -168,7 +169,6 @@
 			children = (
 				90321E8F2E8ED6F000AA9E4D /* Comments.swift */,
 				901BEFA22707E04800B822D3 /* PostModel.swift */,
-				909A58E22E9EAD59005B08A3 /* SubjectModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,6 +203,14 @@
 				F400445B2706964600B910F2 /* Login */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		909A58E42E9EB383005B08A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				909A58E22E9EAD59005B08A3 /* SubjectModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		90D97997270D0FE2008CEB0C /* Commons */ = {

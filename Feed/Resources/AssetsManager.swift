@@ -19,4 +19,6 @@ enum AssetsManager {
     static let colorSecondary = UIColor(named: "colorSecondary") ?? .systemGray
     
     static let colorBackground = UIColor(named: "colorBackground") ?? .white
+    
+    static let colorDarkerBackground = UIColor(named: "colorDarkerBackground") ?? .white
 }

@@ -9,7 +9,13 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class FirebaseAuthManager {
+protocol AuthManaging {
+    static func signIn(email: String, password: String) async throws
+    static func createAccount(name: String, email: String, password: String) async throws
+    static func logout()
+}
+
+class FirebaseAuthManager: AuthManaging {
     
     // MARK: Properties
     private static let db = Firestore.firestore()

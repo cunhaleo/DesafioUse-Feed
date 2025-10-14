@@ -7,7 +7,15 @@
 
 import Foundation
 
-final class UserSession {
+protocol UserSessionProtocol {
+    var name: String? { get }
+    var email: String? { get }
+    var userId: String? { get }
+    func finishSession()
+    func startSession(name: String, email: String, userId: String)
+}
+
+final class UserSession: UserSessionProtocol {
     
     static let shared = UserSession()
     
