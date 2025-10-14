@@ -15,75 +15,74 @@ final class FeedTableViewCell: UITableViewCell {
 
     // MARK: - UI
     private let avatarView: UIView = {
-        let v = UIView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.layer.cornerRadius = 20
-        v.clipsToBounds = true
-        v.backgroundColor = .systemGray5
-        return v
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 20
+        view.clipsToBounds = true
+        view.backgroundColor = .systemGray5
+        return view
     }()
 
     private let nameLabel: UILabel = {
-        let l = UILabel()
-        l.font = .systemFont(ofSize: 14, weight: .semibold)
-        l.translatesAutoresizingMaskIntoConstraints = false
-        return l
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     private let dateLabel: UILabel = {
-        let l = UILabel()
-        l.font = .systemFont(ofSize: 12)
-        l.textColor = .secondaryLabel
-        l.translatesAutoresizingMaskIntoConstraints = false
-        return l
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .secondaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     private let messageLabel: UILabel = {
-        let l = UILabel()
-        l.numberOfLines = 0
-        l.font = .systemFont(ofSize: 15)
-        l.translatesAutoresizingMaskIntoConstraints = false
-        return l
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     private let likeButton: UIButton = {
-        let b = UIButton(type: .system)
-        b.setTitle("Curtir ❤️", for: .normal)
-        b.translatesAutoresizingMaskIntoConstraints = false
-        return b
+        let button = UIButton(type: .system)
+        button.setTitle("Curtir ❤️", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
     private let commentButton: UIButton = {
-        let b = UIButton(type: .system)
-        b.setTitle("Comentários 💬", for: .normal)
-        b.translatesAutoresizingMaskIntoConstraints = false
-        return b
+        let button = UIButton(type: .system)
+        button.setTitle("Comentários 💬", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
-    // container stack that will contain comments list + input; when children hidden, it collapses
     private let commentsContainerStack: UIStackView = {
-        let sv = UIStackView()
-        sv.axis = .vertical
-        sv.spacing = 8
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        return sv
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
 
     private let commentsListStack: UIStackView = {
-        let sv = UIStackView()
-        sv.axis = .vertical
-        sv.spacing = 8
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        return sv
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
 
     private let commentTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Adicione um comentário..."
-        tf.borderStyle = .roundedRect
-        tf.returnKeyType = .send
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        return tf
+        let textField = UITextField()
+        textField.placeholder = "Adicione um comentário..."
+        textField.borderStyle = .roundedRect
+        textField.returnKeyType = .send
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
 
     // MARK: - Init
@@ -146,32 +145,28 @@ final class FeedTableViewCell: UITableViewCell {
     }
 
     // MARK: - Configure
-    /// - Parameters:
-    ///   - post: PostModel (do seu projeto)
-    ///   - comments: comentários expandidos (se existirem) — pode ser nil
-    ///   - expanded: se a célula deve estar expandida
-    ///   - index: índice da célula na tabela (usado em callbacks)
     func configure(with post: PostModel, comments: [Comment]?, expanded: Bool, index: Int) {
         self.index = index
         nameLabel.text = post.name
         dateLabel.text = post.formattedDate
         messageLabel.text = post.message
 
-        // Reset comments area
         commentsListStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        if expanded, let comments = comments, !comments.isEmpty {
-            // mostrar os comentários
-            for c in comments {
-                let lbl = UILabel()
-                lbl.numberOfLines = 0
-                let attributed = NSMutableAttributedString(
-                    string: "\(c.userName) ",
-                    attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
-                )
-                attributed.append(NSAttributedString(string: "\n\(c.message)", attributes: [.font: UIFont.systemFont(ofSize: 14)]))
-                lbl.attributedText = attributed
-                commentsListStack.addArrangedSubview(lbl)
+        if expanded, let comments = comments {
+
+            if !comments.isEmpty {
+                for comment in comments {
+                    let label = UILabel()
+                    label.numberOfLines = 0
+                    let attributed = NSMutableAttributedString(
+                        string: "\(comment.userName) ",
+                        attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .semibold)]
+                    )
+                    attributed.append(NSAttributedString(string: "\n\(comment.message)", attributes: [.font: UIFont.systemFont(ofSize: 14)]))
+                    label.attributedText = attributed
+                    commentsListStack.addArrangedSubview(label)
+                }
             }
             commentsListStack.isHidden = false
             commentTextField.isHidden = false
@@ -183,7 +178,6 @@ final class FeedTableViewCell: UITableViewCell {
 
     // MARK: - Actions
     @objc private func didTapLike() {
-        // O viewModel não expõe método de like; apenas notifica a controller
         delegate?.feedCellDidTapLike(at: index)
     }
 

@@ -132,9 +132,9 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
 extension FeedViewController: FeedTableViewCellDelegate {
 
     func feedCellDidTapLike(at index: Int) {
-        // O ViewModel não tem método de like. Aqui podemos apenas animar/mostrar feedback.
+
         guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? FeedTableViewCell else { return }
-        // pequeno bounce
+
         UIView.animate(withDuration: 0.12,
                        animations: { cell.transform = CGAffineTransform(scaleX: 0.97, y: 0.97) },
                        completion: { _ in
@@ -145,14 +145,10 @@ extension FeedViewController: FeedTableViewCellDelegate {
     func feedCellDidTapComments(at index: Int) {
         let post = viewModel.posts[index]
         guard let postId = post.postId else { return }
-        
         if viewModel.isExpanded(postId: postId) {
-            // já expandido -> colapsa
             viewModel.clearComments(for: postId)
-            // animação de update
             self.reloadRow(at: index)
         } else {
-            // busca comentários (aplica expansão)
             viewModel.fetchComments(for: postId) { [weak self] comments in
                 self?.reloadRow(at: index)
             }
@@ -173,12 +169,7 @@ extension FeedViewController: FeedTableViewCellDelegate {
     func feedCellDidAddComment(_ text: String, at index: Int) {
         let post = viewModel.posts[index]
         guard let postId = post.postId else { return }
-
-        // chama o método do ViewModel que existe
         viewModel.addComment(text, to: postId)
-
-        // opcional: após adicionar, tentar recarregar os comentários imediatamente (o viewModel pode ou não sincronizar imediatamente).
-        // Eu faço um fetchComments para obter a lista atualizada — se o addComment ainda estiver em andamento, pode demorar.
         viewModel.fetchComments(for: postId) { [weak self] _ in
             DispatchQueue.main.async {
                 let ip = IndexPath(row: index, section: 0)
